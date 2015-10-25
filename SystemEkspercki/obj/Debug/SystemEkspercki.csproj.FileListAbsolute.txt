@@ -1,0 +1,8 @@
+c:\users\marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEkspercki\bin\Debug\SystemEkspercki.exe.config
+c:\users\marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEkspercki\bin\Debug\SystemEkspercki.exe
+c:\users\marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEkspercki\bin\Debug\SystemEkspercki.pdb
+c:\users\marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEkspercki\obj\Debug\SystemEkspercki.csprojResolveAssemblyReference.cache
+c:\users\marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEkspercki\obj\Debug\SystemEkspercki.Properties.Resources.resources
+c:\users\marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEkspercki\obj\Debug\SystemEkspercki.csproj.GenerateResource.Cache
+c:\users\marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEkspercki\obj\Debug\SystemEkspercki.exe
+c:\users\marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEkspercki\obj\Debug\SystemEkspercki.pdb
