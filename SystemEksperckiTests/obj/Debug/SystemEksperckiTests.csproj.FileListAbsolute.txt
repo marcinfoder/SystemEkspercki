@@ -1,0 +1,7 @@
+C:\Users\Marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEksperckiTests\obj\Debug\SystemEksperckiTests.csprojResolveAssemblyReference.cache
+C:\Users\Marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEksperckiTests\bin\Debug\SystemEksperckiTests.dll
+C:\Users\Marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEksperckiTests\bin\Debug\SystemEksperckiTests.pdb
+C:\Users\Marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEksperckiTests\bin\Debug\nunit.framework.dll
+C:\Users\Marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEksperckiTests\bin\Debug\nunit.framework.xml
+C:\Users\Marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEksperckiTests\obj\Debug\SystemEksperckiTests.dll
+C:\Users\Marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEksperckiTests\obj\Debug\SystemEksperckiTests.pdb
