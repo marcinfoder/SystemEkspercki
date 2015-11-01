@@ -49,6 +49,7 @@ namespace SystemEkspercki
         public void StartInferenceModule(TableLayoutPanel panel)
         {
             var answers = InterpretCheckBoxs(panel);
+            inferenceModule.InferenceProces(answers);
         }
 
         /// <summary>

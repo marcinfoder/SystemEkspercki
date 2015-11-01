@@ -14,7 +14,8 @@
             IDataAccessLayer dataAccessLayer = new DataAccessLayerFake();
             IMapper mapper = new Mapper();
             IDataProvider dataProvider = new DataProvider(dataAccessLayer, mapper);
-            IInferenceModule inferenceModule = new InferenceModule(dataProvider);
+            IInferenceLogger inferenceLogger = new InferenceLogger();
+            IInferenceModule inferenceModule = new InferenceModule(dataProvider, inferenceLogger);
             IPresenter presenter = new Presenter(inferenceModule);
 
             MainWindow mainWindow = new MainWindow(presenter);

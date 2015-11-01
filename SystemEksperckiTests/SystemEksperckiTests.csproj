@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccessLayerFakeTest.cs" />
+    <Compile Include="InferenceLoggerFake.cs" />
     <Compile Include="MapperTestHelper.cs" />
     <Compile Include="MapperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

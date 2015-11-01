@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Answer.cs" />
     <Compile Include="DataAccessLayer.cs" />
     <Compile Include="DataAccessLayerFake.cs" />
     <Compile Include="DataAccessLayerStrings.cs" />
@@ -52,8 +53,10 @@
     <Compile Include="Db\RuleAndQuestionDb.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="IDataProvider.cs" />
+    <Compile Include="IInferenceLogger.cs" />
     <Compile Include="IInferenceModule.cs" />
     <Compile Include="IMapper.cs" />
+    <Compile Include="InferenceLogger.cs" />
     <Compile Include="InferenceModule.cs" />
     <Compile Include="IPresenter.cs" />
     <Compile Include="IRandom.cs" />
