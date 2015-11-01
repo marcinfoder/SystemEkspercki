@@ -46,6 +46,10 @@
   <ItemGroup>
     <Compile Include="DataAccessLayer.cs" />
     <Compile Include="DataAccessLayerStrings.cs" />
+    <Compile Include="Db\ElementAndFactDb.cs" />
+    <Compile Include="Db\RuleDb.cs" />
+    <Compile Include="IMapper.cs" />
+    <Compile Include="InferenceModule.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,9 +57,16 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="IDataAccessLayer.cs" />
+    <Compile Include="Mapped\Element.cs" />
+    <Compile Include="Mapped\FactAboutElement.cs" />
+    <Compile Include="Mapped\Question.cs" />
+    <Compile Include="Mapped\Rule.cs" />
+    <Compile Include="Mapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ThreeStateCheckBox.cs" />
+    <Compile Include="ThreeStateCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
