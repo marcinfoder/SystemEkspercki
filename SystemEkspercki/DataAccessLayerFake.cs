@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using SystemEkspercki.Db;
 
 namespace SystemEkspercki
@@ -8,10 +7,12 @@ namespace SystemEkspercki
     public class DataAccessLayerFake : IDataAccessLayer
     {
         private readonly IRandom random;
+        private readonly List<Guid> factsGuid; 
 
         public DataAccessLayerFake(IRandom random)
         {
             this.random = random;
+            factsGuid = CreateFactsGuid();
         }
 
         public List<RuleAndQuestionDb> GetRulesAndQuestions()
@@ -24,8 +25,24 @@ namespace SystemEkspercki
             {
                 Guid questionId = Guid.NewGuid();
                 Guid ruleId = Guid.NewGuid();
+                Guid creatingFactId = factsGuid[i];
 
-                int argumentsToCreate = random.Next()
+                for (int j = 0; j < factsGuid.Count; j++)
+                {
+                    if (j == i)
+                    {
+                        continue;
+                    }
+
+                    rulesAndQuestions.Add(new RuleAndQuestionDb
+                    {
+                        RuleId = ruleId,
+                        QuestionId = questionId,
+                        CreatingFactId = creatingFactId,
+                        RuleArgument = factsGuid[j],
+                        ArgumentRequiredValue = random.Next(2) % 2 == 0
+                    });
+                }
             }
 
             return rulesAndQuestions;
@@ -42,14 +59,13 @@ namespace SystemEkspercki
                 Guid elementId = Guid.NewGuid();
                 string elementName = i.ToString();
 
-                int factsToCreate = random.Next(10, 30);
-                for (int j = 0; j < factsToCreate; j++)
+                for (int j = 0; j < factsGuid.Count; j++)
                 {
                     elementsAndFacts.Add(new ElementAndFactDb
                     {
                         ElementId = elementId,
                         ElementName = elementName,
-                        FactId = Guid.NewGuid(),
+                        FactId = factsGuid[j],
                         FactName = ((factBaseNameFrom * i) + j).ToString(),
                         Value = random.Next(2) % 2 == 0
                     });
@@ -57,6 +73,19 @@ namespace SystemEkspercki
             }
 
             return elementsAndFacts;
+        }
+
+        private List<Guid> CreateFactsGuid()
+        {
+            List<Guid> guids = new List<Guid>();
+
+            int count = random.Next(10, 30);
+            for (int i = 0; i < count; i++)
+            {
+                guids.Add(Guid.NewGuid());
+            }
+
+            return guids;
         }
     }
 }
