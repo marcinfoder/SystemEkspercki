@@ -45,11 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccessLayer.cs" />
+    <Compile Include="DataAccessLayerFake.cs" />
     <Compile Include="DataAccessLayerStrings.cs" />
     <Compile Include="Db\ElementAndFactDb.cs" />
     <Compile Include="Db\RuleAndQuestionDb.cs" />
     <Compile Include="IMapper.cs" />
     <Compile Include="InferenceModule.cs" />
+    <Compile Include="IRandom.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +70,7 @@
     <Compile Include="ThreeStateCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="TrueRandom.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
