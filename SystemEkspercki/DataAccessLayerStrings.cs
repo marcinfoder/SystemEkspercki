@@ -19,11 +19,11 @@
         /// <summary>
         /// Stored procedure name
         /// </summary>
-        public static string SelectRules
+        public static string SelectRulesAndQuestions
         {
             get
             {
-                return "selectRules";
+                return "selectRulesAndQuestions";
             }
         }
 

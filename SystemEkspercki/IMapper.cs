@@ -7,5 +7,6 @@ namespace SystemEkspercki
     public interface IMapper
     {
         List<Element> GetElements(List<ElementAndFactDb> elementsAndFacts);
+        List<Question> GetQuestions(List<RuleAndQuestionDb> rulesAndQuestions);
     }
 }

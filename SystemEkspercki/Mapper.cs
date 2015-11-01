@@ -44,7 +44,43 @@ namespace SystemEkspercki
         }
 
         /// <summary>
-        /// Adds new element to list
+        /// Gets questions
+        /// </summary>
+        /// <param name="rulesAndQuestions"></param>
+        /// <returns></returns>
+        public List<Question> GetQuestions(List<RuleAndQuestionDb> rulesAndQuestions)
+        {
+            List<Question> questions = new List<Question>();
+
+            foreach (RuleAndQuestionDb ruleAndQuestion in rulesAndQuestions)
+            {
+                bool isFound = false;
+                foreach (Question question in questions)
+                {
+                    if (question.Id == ruleAndQuestion.QuestionId)
+                    {
+                        question.Rule.Arguments.Add(new RuleArgument
+                        {
+                            Id = ruleAndQuestion.RuleArgument,
+                            RequiredValue = ruleAndQuestion.ArgumentRequiredValue
+                        });
+
+                        isFound = true;
+                        break;
+                    }
+                }
+
+                if (!isFound)
+                {
+                    questions.Add(NewQuestion(ruleAndQuestion));
+                }
+            }
+
+            return questions;
+        }
+
+        /// <summary>
+        /// Return new element to list
         /// </summary>
         /// <param name="elementAndFact"></param>
         /// <returns></returns>
@@ -61,6 +97,34 @@ namespace SystemEkspercki
                         Id = elementAndFact.FactId,
                         Name = elementAndFact.FactName,
                         Value = elementAndFact.Value
+                    }
+                }
+            };
+        }
+
+        /// <summary>
+        /// Return new question
+        /// </summary>
+        /// <param name="ruleAndQuestion"></param>
+        /// <returns></returns>
+        private Question NewQuestion(RuleAndQuestionDb ruleAndQuestion)
+        {
+            return new Question
+            {
+                Id = ruleAndQuestion.QuestionId,
+                Content = ruleAndQuestion.QuestionContent,
+                Rule = new Rule
+                {
+                    Id = ruleAndQuestion.RuleId,
+                    Name = ruleAndQuestion.RuleName,
+                    CreatingFact = ruleAndQuestion.CreatingFactId,
+                    Arguments = new List<RuleArgument>
+                    {
+                        new RuleArgument
+                        {
+                            Id = ruleAndQuestion.RuleArgument,
+                            RequiredValue = ruleAndQuestion.ArgumentRequiredValue
+                        }
                     }
                 }
             };

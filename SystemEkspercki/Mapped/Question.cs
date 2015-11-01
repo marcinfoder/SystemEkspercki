@@ -6,5 +6,6 @@ namespace SystemEkspercki.Mapped
     {
         public Guid Id { get; set; }
         public string Content { get; set; }
+        public Rule Rule { get; set; }
     }
 }

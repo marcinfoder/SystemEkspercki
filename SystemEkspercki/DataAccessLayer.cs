@@ -14,27 +14,31 @@ namespace SystemEkspercki
         /// Get rules from database
         /// </summary>
         /// <returns></returns>
-        public List<RuleDb> GetRules()
+        public List<RuleAndQuestionDb> GetRulesAndQuestions()
         {
-            List<RuleDb> rules  = new List<RuleDb>();
+            List<RuleAndQuestionDb> rulesAndQuestions  = new List<RuleAndQuestionDb>();
 
             using (SqlConnection connection = new SqlConnection(DataAccessLayerStrings.ExpertDbConnectionString))
             {
-                SqlCommand command = new SqlCommand(DataAccessLayerStrings.SelectRules, connection);
+                SqlCommand command = new SqlCommand(DataAccessLayerStrings.SelectRulesAndQuestions, connection);
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    rules.Add(new RuleDb
+                    rulesAndQuestions.Add(new RuleAndQuestionDb
                     {
+                        RuleId = (Guid)reader["RuleId"],
+                        RuleName = (string)reader["RuleName"],
+                        QuestionId = (Guid)reader["QuestionId"],
+                        QuestionName = (string)reader["QuestionName"],
+                        QuestionContent = (string)reader["QuestionContent"],
                         CreatingFactId = (Guid)reader["RuleCreatingFactId"],
-                        Id = (Guid)reader["RuleId"],
-                        Name = (string)reader["RuleName"],
-                        QuestionId = (Guid)reader["RuleQuestionId"]
+                        RuleArgument = (Guid)reader["RuleArgument"],
+                        ArgumentRequiredValue = (bool)reader["ArgumentRequiredValue"]
                     });
                 }
             }
 
-            return rules;
+            return rulesAndQuestions;
         }
 
         /// <summary>

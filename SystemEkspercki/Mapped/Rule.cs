@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SystemEkspercki.Mapped
 {
@@ -6,7 +7,7 @@ namespace SystemEkspercki.Mapped
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public Question Question { get; set; }
-        public Guid CreatingFactId { get; set; }
+        public List<RuleArgument> Arguments { get; set; }
+        public Guid CreatingFact { get; set; }
     }
 }

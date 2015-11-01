@@ -47,7 +47,7 @@
     <Compile Include="DataAccessLayer.cs" />
     <Compile Include="DataAccessLayerStrings.cs" />
     <Compile Include="Db\ElementAndFactDb.cs" />
-    <Compile Include="Db\RuleDb.cs" />
+    <Compile Include="Db\RuleAndQuestionDb.cs" />
     <Compile Include="IMapper.cs" />
     <Compile Include="InferenceModule.cs" />
     <Compile Include="MainWindow.cs">
@@ -61,6 +61,7 @@
     <Compile Include="Mapped\FactAboutElement.cs" />
     <Compile Include="Mapped\Question.cs" />
     <Compile Include="Mapped\Rule.cs" />
+    <Compile Include="Mapped\RuleArgument.cs" />
     <Compile Include="Mapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

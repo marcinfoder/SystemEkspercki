@@ -8,7 +8,7 @@ namespace SystemEkspercki
     /// </summary>
     public interface IDataAccessLayer
     {
-        List<RuleDb> GetRules();
+        List<RuleAndQuestionDb> GetRulesAndQuestions();
         List<ElementAndFactDb> GetElementsAndFacts();
     }
 }
