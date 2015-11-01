@@ -7,7 +7,11 @@ namespace SystemEkspercki
     public class DataAccessLayerFake : IDataAccessLayer
     {
         private readonly IRandom random;
-        private readonly List<Guid> factsGuid; 
+        private readonly List<Guid> factsGuid;
+
+        public DataAccessLayerFake() : this(new TrueRandom())
+        {
+        }
 
         public DataAccessLayerFake(IRandom random)
         {
@@ -19,7 +23,7 @@ namespace SystemEkspercki
         {
             List<RuleAndQuestionDb> rulesAndQuestions = new List<RuleAndQuestionDb>();
 
-            int questionsToCreate = random.Next(10, 30);
+            int questionsToCreate = factsGuid.Count;
 
             for (int i = 0; i < questionsToCreate; i++)
             {
@@ -38,6 +42,7 @@ namespace SystemEkspercki
                     {
                         RuleId = ruleId,
                         QuestionId = questionId,
+                        QuestionContent = "lala",
                         CreatingFactId = creatingFactId,
                         RuleArgument = factsGuid[j],
                         ArgumentRequiredValue = random.Next(2) % 2 == 0

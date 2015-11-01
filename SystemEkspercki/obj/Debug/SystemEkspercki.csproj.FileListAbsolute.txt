@@ -6,3 +6,4 @@ c:\users\marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEksp
 c:\users\marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEkspercki\obj\Debug\SystemEkspercki.csproj.GenerateResource.Cache
 c:\users\marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEkspercki\obj\Debug\SystemEkspercki.exe
 c:\users\marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEkspercki\obj\Debug\SystemEkspercki.pdb
+C:\Users\Marcin\documents\visual studio 2013\Projects\SystemEkspercki\SystemEkspercki\obj\Debug\SystemEkspercki.MainWindow.resources

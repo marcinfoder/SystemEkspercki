@@ -4,19 +4,17 @@ using SystemEkspercki.Mapped;
 
 namespace SystemEkspercki
 {
-    public class InferenceModule
+    public class InferenceModule : IInferenceModule
     {
-        private readonly IMapper mapper;
-        private List<Element> elements; 
+        private readonly IDataProvider dataProvider;
 
-        public InferenceModule(IMapper mapper)
+        public InferenceModule(IDataProvider dataProvider)
         {
-            if (mapper == null)
-            {
-                throw new ArgumentNullException("mapper");
-            }
+            this.dataProvider = dataProvider;
 
-            this.mapper = mapper;
+            Questions = dataProvider.GetQuestions();
         }
+
+        public List<Question> Questions { get; private set; }
     }
 }

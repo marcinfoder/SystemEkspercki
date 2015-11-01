@@ -47,10 +47,15 @@
     <Compile Include="DataAccessLayer.cs" />
     <Compile Include="DataAccessLayerFake.cs" />
     <Compile Include="DataAccessLayerStrings.cs" />
+    <Compile Include="DataProvider.cs" />
     <Compile Include="Db\ElementAndFactDb.cs" />
     <Compile Include="Db\RuleAndQuestionDb.cs" />
+    <Compile Include="Factory.cs" />
+    <Compile Include="IDataProvider.cs" />
+    <Compile Include="IInferenceModule.cs" />
     <Compile Include="IMapper.cs" />
     <Compile Include="InferenceModule.cs" />
+    <Compile Include="IPresenter.cs" />
     <Compile Include="IRandom.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
@@ -65,12 +70,16 @@
     <Compile Include="Mapped\Rule.cs" />
     <Compile Include="Mapped\RuleArgument.cs" />
     <Compile Include="Mapper.cs" />
+    <Compile Include="Presenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ThreeStateCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="TrueRandom.cs" />
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
