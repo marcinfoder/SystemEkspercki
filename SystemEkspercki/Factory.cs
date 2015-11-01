@@ -1,7 +1,14 @@
 ﻿namespace SystemEkspercki
 {
+    /// <summary>
+    /// Factory
+    /// </summary>
     public static class Factory
     {
+        /// <summary>
+        /// Creates main window
+        /// </summary>
+        /// <returns>Main window</returns>
         public static MainWindow GetMainWindow()
         {
             IDataAccessLayer dataAccessLayer = new DataAccessLayerFake();

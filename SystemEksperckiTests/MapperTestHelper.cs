@@ -88,12 +88,3 @@ namespace SystemEksperckiTests
         }
     }
 }
-
-
-//new RuleAndQuestionDb
-//                {
-//                    RuleId = Guid.Parse(""),
-//                    QuestionId = Guid.Parse(""),
-//                    CreatingFactId = Guid.Parse(""),
-//                    RuleArgument = Guid.Parse("")
-//                }

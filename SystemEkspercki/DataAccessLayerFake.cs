@@ -4,21 +4,38 @@ using SystemEkspercki.Db;
 
 namespace SystemEkspercki
 {
+    /// <summary>
+    /// Data access layer fake
+    /// </summary>
     public class DataAccessLayerFake : IDataAccessLayer
     {
+        /// <summary>
+        /// read only items
+        /// </summary>
         private readonly IRandom random;
         private readonly List<Guid> factsGuid;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public DataAccessLayerFake() : this(new TrueRandom())
         {
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="random"></param>
         public DataAccessLayerFake(IRandom random)
         {
             this.random = random;
             factsGuid = CreateFactsGuid();
         }
 
+        /// <summary>
+        /// Gets RuleAndQuestionDb
+        /// </summary>
+        /// <returns></returns>
         public List<RuleAndQuestionDb> GetRulesAndQuestions()
         {
             List<RuleAndQuestionDb> rulesAndQuestions = new List<RuleAndQuestionDb>();
@@ -53,6 +70,10 @@ namespace SystemEkspercki
             return rulesAndQuestions;
         }
 
+        /// <summary>
+        /// Gets ElementAndFactDb
+        /// </summary>
+        /// <returns></returns>
         public List<ElementAndFactDb> GetElementsAndFacts()
         {
             List<ElementAndFactDb> elementsAndFacts = new List<ElementAndFactDb>();
@@ -80,6 +101,10 @@ namespace SystemEkspercki
             return elementsAndFacts;
         }
 
+        /// <summary>
+        /// Create list of Guid
+        /// </summary>
+        /// <returns></returns>
         private List<Guid> CreateFactsGuid()
         {
             List<Guid> guids = new List<Guid>();

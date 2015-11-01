@@ -11,7 +11,7 @@ namespace SystemEkspercki
         /// <summary>
         /// Gets and sets question GUID
         /// </summary>
-        public Guid QuestionGuid { get; set; }
+        public Guid QuestionId { get; set; }
 
         /// <summary>
         /// Gets the boolean-nullable value of check state
@@ -49,7 +49,8 @@ namespace SystemEkspercki
         public ThreeStateCheckBox(Guid questionGuid, string text)
         {
             ThreeState = true;
-            QuestionGuid = questionGuid;
+            CheckState = CheckState.Indeterminate;
+            QuestionId = questionGuid;
             Text = text;
         }
 
