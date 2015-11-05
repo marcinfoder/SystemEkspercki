@@ -7,5 +7,6 @@ namespace SystemEkspercki
     {
         List<Element> GetElements();
         List<Question> GetQuestions();
+        List<Fact> GetFacts();
     }
 }

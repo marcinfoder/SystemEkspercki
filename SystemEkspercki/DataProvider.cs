@@ -44,5 +44,15 @@ namespace SystemEkspercki
             var dbEntities = dataAccessLayer.GetRulesAndQuestions();
             return mapper.GetQuestions(dbEntities);
         }
+
+        /// <summary>
+        /// Gets facts
+        /// </summary>
+        /// <returns></returns>
+        public List<Fact> GetFacts()
+        {
+            var dbEntities = dataAccessLayer.GetFacts();
+            return mapper.GetFacts(dbEntities);
+        }
     }
 }

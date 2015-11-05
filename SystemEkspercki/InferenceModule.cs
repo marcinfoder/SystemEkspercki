@@ -24,6 +24,8 @@ namespace SystemEkspercki
 
         public List<Element> Elements { get; private set; }
 
+        public List<Fact> Facts { get; private set; }
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -36,43 +38,59 @@ namespace SystemEkspercki
 
             Questions = this.dataProvider.GetQuestions();
             Elements = this.dataProvider.GetElements();
+            Facts = this.dataProvider.GetFacts();
         }
 
         /// <summary>
         /// Start inferencing
         /// </summary>
         /// <param name="answers"></param>
+        /// <param name="log"></param>
         /// <returns></returns>
-        public List<Element> InferenceProces(List<Answer> answers)
+        public List<Element> InferenceProces(List<Answer> answers, out string log)
         {
+            answers.RemoveAll(a => a.Value == null);
+            answers.ForEach(a => a.Question = FindQuestionForGivenAnswer(a));
             List<Element> results = new List<Element>();
 
             logger.StartOfInferenceProces();
-            foreach (Answer answer in answers)
+            foreach (Element element in Elements)
             {
-                Question question = GetAnswerQuestion(answer);
+                logger.ProcessingElement(element);
+                bool isResult = true;
 
-                logger.ProcessingAnswer(answer, question);
-                foreach (Element element in Elements)
+                foreach (Answer answer in answers)
                 {
-                    logger.ProcessingElement(element);
-                    if (answer.Value != null && Answer(element, question, (bool) answer.Value))
+                    logger.ProcessingAnswer(answer);
+                    if (Answer(element, answer.Question, (bool)answer.Value))
                     {
-                        logger.AddingElement(element);
-                        results.Add(element);
+                        logger.ElementMatchAnswer();
                     }
                     else
                     {
-                        logger.NotAddingElement(element);
+                        logger.ElementNotMatchAnswer();
+                        isResult = false;
+                        break;
                     }
 
-                    logger.EndOfProcessingElement(element);
+                    logger.EndOfProcessingAnswer(answer);
                 }
 
-                logger.EndOfProcessingAnswer(answer, question);
+                if (isResult)
+                {
+                    logger.AddingElement(element);
+                    results.Add(element);
+                }
+                else
+                {
+                    logger.NotAddingElement(element);
+                }
+
+                logger.EndOfProcessingElement(element);
             }
 
             logger.EndOfInferenceProces();
+            log = logger.GetString();
             return results;
         }
 
@@ -86,7 +104,7 @@ namespace SystemEkspercki
         private bool Answer(Element element, Question question, bool value)
         {
             logger.LookingForFact(question);
-            var factAboutElement = element.Facts.Find(f => f.Id == question.Rule.CreatingFact);
+            var factAboutElement = FindFactAboutElementWhichIsQuestionSubject(element, question);
 
             if (factAboutElement != default(FactAboutElement))
             {
@@ -98,38 +116,72 @@ namespace SystemEkspercki
         }
 
         /// <summary>
+        /// finds fact about element
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="question"></param>
+        /// <returns></returns>
+        private FactAboutElement FindFactAboutElementWhichIsQuestionSubject(Element element, Question question)
+        {
+            return element.Facts.Find(f => f.Id == question.Rule.CreatingFact);
+        }
+
+        /// <summary>
         /// Gets question for an answer
         /// </summary>
         /// <param name="answer"></param>
         /// <returns></returns>
-        private Question GetAnswerQuestion(Answer answer)
+        private Question FindQuestionForGivenAnswer(Answer answer)
         {
             return Questions.Find(q => q.Id == answer.QuestionId);
         }
 
-        private Question GetAnsweringQuestion(Guid factId)
+        /// <summary>
+        /// Finds question for given fact
+        /// </summary>
+        /// <param name="factId"></param>
+        /// <returns></returns>
+        private Question FindQuestionForGivenFact(Guid factId)
         {
             return Questions.Find(q => q.Rule.CreatingFact == factId);
         }
 
+        /// <summary>
+        /// Find fact about element
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="ruleArgument"></param>
+        /// <returns></returns>
+        private FactAboutElement FindFactAboutElementWhichIsRuleArgument(Element element, RuleArgument ruleArgument)
+        {
+            return element.Facts.Find(fae => fae.Id == ruleArgument.Id);
+        }
+
+        /// <summary>
+        /// SearchForAnswer
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="question"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         private bool SearchForAnswer(Element element, Question question, bool value)
         {
             foreach (RuleArgument ruleArgument in question.Rule.Arguments)
             {
-                FactAboutElement factAboutElement = element.Facts.Find(fae => fae.Id == ruleArgument.Id);
+                FactAboutElement factAboutElement = FindFactAboutElementWhichIsRuleArgument(element, ruleArgument);
 
                 if (factAboutElement == null)
                 {
-                    Question answeringQuestion = GetAnsweringQuestion(ruleArgument.Id);
+                    Question answeringQuestion = FindQuestionForGivenFact(ruleArgument.Id);
 
                     if (answeringQuestion == null)
                     {
                         return false;
                     }
 
-                    if (SearchForAnswer(element, question, ruleArgument.RequiredValue))
+                    if (SearchForAnswer(element, answeringQuestion, ruleArgument.RequiredValue))
                     {
-                        factAboutElement = element.Facts.Find(fae => fae.Id == ruleArgument.Id);
+                        factAboutElement = FindFactAboutElementWhichIsRuleArgument(element, ruleArgument);
                     }
                 }
 
@@ -142,7 +194,7 @@ namespace SystemEkspercki
             element.Facts.Add(new FactAboutElement
             {
                 Id = question.Rule.CreatingFact,
-                Name = string.Empty, // find element and assign name
+                Name = element.Name, // find element and assign name
                 Value = value
             });
             return true;

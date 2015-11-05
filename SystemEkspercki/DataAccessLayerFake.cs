@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using SystemEkspercki.Db;
 
 namespace SystemEkspercki
@@ -99,6 +100,19 @@ namespace SystemEkspercki
             }
 
             return elementsAndFacts;
+        }
+
+        /// <summary>
+        /// Gets facts
+        /// </summary>
+        /// <returns></returns>
+        public List<FactDb> GetFacts()
+        {
+            return factsGuid.Select(f => new FactDb
+            {
+                Id = f,
+                Name = "nana"
+            }).ToList();
         }
 
         /// <summary>

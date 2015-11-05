@@ -10,5 +10,6 @@ namespace SystemEkspercki
     {
         List<RuleAndQuestionDb> GetRulesAndQuestions();
         List<ElementAndFactDb> GetElementsAndFacts();
+        List<FactDb> GetFacts();
     }
 }

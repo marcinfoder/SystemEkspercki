@@ -68,5 +68,30 @@ namespace SystemEkspercki
 
             return elementsAndFacts;
         }
+
+        /// <summary>
+        /// Get facts
+        /// </summary>
+        /// <returns></returns>
+        public List<FactDb> GetFacts()
+        {
+            List<FactDb> elementsAndFacts = new List<FactDb>();
+
+            using (SqlConnection connection = new SqlConnection(DataAccessLayerStrings.ExpertDbConnectionString))
+            {
+                SqlCommand command = new SqlCommand(DataAccessLayerStrings.SelectFacts, connection);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    elementsAndFacts.Add(new FactDb
+                    {
+                        Id = (Guid)reader["FactId"],
+                        Name = (string)reader["FactName"]
+                    });
+                }
+            }
+
+            return elementsAndFacts;
+        }
     }
 }

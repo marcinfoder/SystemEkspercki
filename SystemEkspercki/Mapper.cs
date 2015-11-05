@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using SystemEkspercki.Db;
 using SystemEkspercki.Mapped;
 
@@ -77,6 +78,20 @@ namespace SystemEkspercki
             }
 
             return questions;
+        }
+
+        /// <summary>
+        /// Gets facts
+        /// </summary>
+        /// <param name="facts"></param>
+        /// <returns></returns>
+        public List<Fact> GetFacts(List<FactDb> facts)
+        {
+            return facts.Select(f => new Fact
+            {
+                Id = f.Id,
+                Name = f.Name
+            }).ToList();
         }
 
         /// <summary>

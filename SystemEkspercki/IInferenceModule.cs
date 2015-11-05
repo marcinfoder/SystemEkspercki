@@ -7,6 +7,6 @@ namespace SystemEkspercki
     {
         List<Question> Questions { get; }
 
-        List<Element> InferenceProces(List<Answer> answers);
+        List<Element> InferenceProces(List<Answer> answers, out string log);
     }
 }

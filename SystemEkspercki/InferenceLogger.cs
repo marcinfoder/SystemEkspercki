@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using SystemEkspercki.Mapped;
 
@@ -16,12 +17,8 @@ namespace SystemEkspercki
 
         public void StartOfInferenceProces()
         {
-            stringBuilder.AppendLine("Rozpoczęto proces wnioskowania.");
+            stringBuilder.AppendLine(Indent() + "Rozpoczęto proces wnioskowania.");
             indentDepth++;
-        }
-
-        public void ProcessingAnswer(Answer answer, Question question)
-        {
         }
 
         public void AddingElement(Element element)
@@ -34,7 +31,7 @@ namespace SystemEkspercki
 
         public void EndOfInferenceProces()
         {
-            stringBuilder.AppendLine("Zakończono proces wnioskowania.");
+            stringBuilder.AppendLine(Indent() + "Zakończono proces wnioskowania." );
 
             if (indentDepth != 0)
             {
@@ -45,6 +42,58 @@ namespace SystemEkspercki
         public string GetString()
         {
             return stringBuilder.ToString();
+        }
+
+        public void ProcessingElement(Element element)
+        {
+            stringBuilder.AppendLine(Indent() + string.Format("Przetwarzanie elementu: {0}.", element.Name));
+            indentDepth++;
+        }
+
+        public void EndOfProcessingElement(Element element)
+        {
+            stringBuilder.AppendLine(Indent() + string.Format("Koniec przetwarzania elementu: {0}.", element.Name));
+            indentDepth--;
+        }
+
+        public void LookingForFact(Question question)
+        {
+        }
+
+        public void ElementHasAnswer(Element element, Question question)
+        {
+        }
+
+        public void ElementDoesnotHaveAnswer(Element element, Question question)
+        {
+        }
+
+
+        public void ProcessingAnswer(Answer answer)
+        {
+            stringBuilder.AppendLine(Indent() + string.Format("Sprawdzanie czy element pasuje do odpowiedzi, która uruchamia regułę: {0}.", answer.Question.Rule.Name));
+            indentDepth++;
+        }
+
+        public void EndOfProcessingAnswer(Answer answer)
+        {
+            stringBuilder.AppendLine(Indent() + string.Format("Zakończono sprawdzanie czy element pasuje do odpowiedzi, która uruchamia regułę: {0}.", answer.Question.Rule.Name));
+            indentDepth--;
+        }
+
+        public void ElementMatchAnswer()
+        {
+            stringBuilder.AppendLine(Indent() + "Element pasuje do odpowiedzi.");
+        }
+
+        public void ElementNotMatchAnswer()
+        {
+            stringBuilder.AppendLine(Indent() + "Element nie pasuje do odpowiedzi.");
+        }
+
+        private string Indent()
+        {
+            return string.Join(" ", Enumerable.Range(0, indentDepth));
         }
     }
 }

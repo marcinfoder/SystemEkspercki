@@ -37,5 +37,16 @@
                 return "selectElementsAndFacts";
             }
         }
+
+        /// <summary>
+        /// Stored procedure name
+        /// </summary>
+        public static string SelectFacts
+        {
+            get
+            {
+                return "selectFacts";
+            }
+        }
     }
 }

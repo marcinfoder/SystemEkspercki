@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -46,10 +47,13 @@ namespace SystemEkspercki
         /// Start the inference module
         /// </summary>
         /// <param name="panel">Panel</param>
-        public void StartInferenceModule(TableLayoutPanel panel)
+        /// <param name="logContainer">Panel</param>
+        public void StartInferenceModule(TableLayoutPanel panel, RichTextBox logContainer)
         {
             var answers = InterpretCheckBoxs(panel);
-            inferenceModule.InferenceProces(answers);
+            string log = string.Empty;
+            inferenceModule.InferenceProces(answers, out log);
+            logContainer.Text = log;
         }
 
         /// <summary>

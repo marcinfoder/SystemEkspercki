@@ -8,6 +8,6 @@ namespace SystemEkspercki.Mapped
         public Guid Id { get; set; }
         public string Name { get; set; }
         public List<RuleArgument> Arguments { get; set; }
-        public Guid CreatingFact { get; set; }
+        public Fact Target { get; set; }
     }
 }
