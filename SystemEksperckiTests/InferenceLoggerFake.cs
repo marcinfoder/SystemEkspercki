@@ -67,7 +67,7 @@ namespace SystemEksperckiTests
         {
         }
 
-        public void Result(int result, int all)
+        public void Result(int result, int all, string time)
         {
         }
 

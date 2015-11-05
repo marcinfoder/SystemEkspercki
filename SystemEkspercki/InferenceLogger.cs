@@ -113,9 +113,9 @@ namespace SystemEkspercki
             stringBuilder.AppendLine(Indent() + "Element nie pasuje do odpowiedzi");
         }
 
-        public void Result(int count, int all)
+        public void Result(int count, int all, string time)
         {
-            stringBuilder.Append(Indent() + string.Format("Pasuje {0} z {1} elementów", count, all));
+            stringBuilder.Append(Indent() + string.Format("Znaleziono {0} z {1} pasujących elementów w czasie {2} [ms]", count, all, time));
         }
 
         public void RemovingEmptyAnswers()

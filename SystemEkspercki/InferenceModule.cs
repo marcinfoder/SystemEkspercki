@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using SystemEkspercki.Mapped;
 
@@ -16,6 +17,8 @@ namespace SystemEkspercki
         private readonly IDataProvider dataProvider;
 
         private readonly IInferenceLogger logger;
+
+        private readonly Stopwatch stopwatch;
 
         /// <summary>
         /// Properies
@@ -35,6 +38,7 @@ namespace SystemEkspercki
         {
             this.dataProvider = dataProvider;
             this.logger = logger;
+            this.stopwatch = new Stopwatch();
 
             Questions = this.dataProvider.GetQuestions();
             Elements = this.dataProvider.GetElements();
@@ -49,6 +53,7 @@ namespace SystemEkspercki
         /// <returns></returns>
         public List<Element> InferenceProces(List<Answer> answers, out string log)
         {
+            stopwatch.Start();
             logger.RemovingEmptyAnswers();
             int count = answers.Count;
             int removed = answers.RemoveAll(a => a.Value == null);
@@ -102,9 +107,11 @@ namespace SystemEkspercki
             }
 
             logger.EndOfInferenceProces();
-            logger.Result(results.Count, Elements.Count);
+            logger.Result(results.Count, Elements.Count, stopwatch.Elapsed.TotalMilliseconds.ToString());
             
             log = logger.GetString();
+            stopwatch.Stop();
+            stopwatch.Reset();
             return results;
         }
 
