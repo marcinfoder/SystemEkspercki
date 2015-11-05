@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using SystemEkspercki.Db;
 using SystemEkspercki.Mapped;
@@ -132,7 +131,11 @@ namespace SystemEkspercki
                 {
                     Id = ruleAndQuestion.RuleId,
                     Name = ruleAndQuestion.RuleName,
-                    CreatingFact = ruleAndQuestion.CreatingFactId,
+                    Target = new Fact
+                    {
+                        Id = ruleAndQuestion.CreatingFactId,
+                        Name = ruleAndQuestion.CreatingFactName
+                    },
                     Arguments = new List<RuleArgument>
                     {
                         new RuleArgument

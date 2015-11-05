@@ -32,6 +32,7 @@ namespace SystemEkspercki
                         QuestionName = (string)reader["QuestionName"],
                         QuestionContent = (string)reader["QuestionContent"],
                         CreatingFactId = (Guid)reader["RuleCreatingFactId"],
+                        CreatingFactName = (string)reader["RuleCreatingFactName"],
                         RuleArgument = (Guid)reader["RuleArgument"],
                         ArgumentRequiredValue = (bool)reader["ArgumentRequiredValue"]
                     });

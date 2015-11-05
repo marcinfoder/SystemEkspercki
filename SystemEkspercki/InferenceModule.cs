@@ -123,7 +123,7 @@ namespace SystemEkspercki
         /// <returns></returns>
         private FactAboutElement FindFactAboutElementWhichIsQuestionSubject(Element element, Question question)
         {
-            return element.Facts.Find(f => f.Id == question.Rule.CreatingFact);
+            return element.Facts.Find(f => f.Id == question.Rule.Target.Id);
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace SystemEkspercki
         /// <returns></returns>
         private Question FindQuestionForGivenFact(Guid factId)
         {
-            return Questions.Find(q => q.Rule.CreatingFact == factId);
+            return Questions.Find(q => q.Rule.Target.Id == factId);
         }
 
         /// <summary>
@@ -193,8 +193,8 @@ namespace SystemEkspercki
 
             element.Facts.Add(new FactAboutElement
             {
-                Id = question.Rule.CreatingFact,
-                Name = element.Name, // find element and assign name
+                Id = question.Rule.Target.Id,
+                Name = question.Rule.Target.Name,
                 Value = value
             });
             return true;

@@ -9,29 +9,11 @@ namespace SystemEksperckiTests
         {
         }
 
-        public void ProcessingAnswer(Answer answer, Question question)
+        public void ProcessingAnswer(Answer answer)
         {
         }
 
-        public void AddingElement(Element element)
-        {
-        }
-
-        public void NotAddingElement(Element element)
-        {
-        }
-
-        public void EndOfInferenceProces()
-        {
-        }
-
-        public string GetString()
-        {
-            return string.Empty;
-        }
-
-
-        public void EndOfProcessingAnswer(Answer answer, Question question)
+        public void EndOfProcessingAnswer(Answer answer)
         {
         }
 
@@ -55,21 +37,29 @@ namespace SystemEksperckiTests
         {
         }
 
-
-        public void ProcessingAnswer(Answer answer)
+        public void ElementMatchAnswer()
         {
         }
 
-        public void EndOfProcessingAnswer(Answer answer)
+        public void ElementNotMatchAnswer()
         {
         }
 
-        public void ElementMatchAnswer(Element element, Answer answer)
+        public void AddingElement(Element element)
         {
         }
 
-        public void ElementNotMatchAnswer(Element element, Answer answer)
+        public void NotAddingElement(Element element)
         {
+        }
+
+        public void EndOfInferenceProces()
+        {
+        }
+
+        public string GetString()
+        {
+            return string.Empty;
         }
     }
 }

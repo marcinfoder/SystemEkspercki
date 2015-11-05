@@ -77,7 +77,10 @@ namespace SystemEksperckiTests
                                 RequiredValue = true
                             }
                         },
-                        CreatingFact = Guid.Parse("A0000000-0000-0000-0000-000000000000")
+                        Target = new Fact
+                        {
+                            Id = Guid.Parse("A0000000-0000-0000-0000-000000000000")
+                        }
                     }
                 },
                 new Question
@@ -96,7 +99,10 @@ namespace SystemEksperckiTests
                                 RequiredValue = true
                             }
                         },
-                        CreatingFact = Guid.Parse("C0000000-0000-0000-0000-000000000000")
+                        Target = new Fact
+                        {
+                            Id = Guid.Parse("C0000000-0000-0000-0000-000000000000")
+                        }
                     }
                 }
             };

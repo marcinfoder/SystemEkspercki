@@ -10,6 +10,7 @@ namespace SystemEkspercki.Db
         public string QuestionName { get; set; }
         public string QuestionContent { get; set; }
         public Guid CreatingFactId { get; set; }
+        public string CreatingFactName { get; set; }
         public Guid RuleArgument { get; set; }
         public bool ArgumentRequiredValue { get; set; }
     }

@@ -19,9 +19,10 @@ namespace SystemEksperckiTests
             dataProvider.Stub(a => a.GetQuestions()).Return(InferenceModuleTestsHelper.GetQuestions());
             IInferenceModule inferenceModule = new InferenceModule(dataProvider, new InferenceLoggerFake());
             List<Answer> answers = InferenceModuleTestsHelper.GetAnswers();
+            string log = string.Empty;
 
             // Act
-            var result = inferenceModule.InferenceProces(answers);
+            var result = inferenceModule.InferenceProces(answers, out log);
 
             // Assert
             Assert.That(result.Count, Is.EqualTo(1));

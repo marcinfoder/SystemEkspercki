@@ -33,8 +33,7 @@ namespace SystemEkspercki
         /// <param name="e"></param>
         private void btnStart_Click(object sender, EventArgs e)
         {
-            var kontrolki = inferenceModulePanel.Controls.OfType<ThreeStateCheckBox>().ToList();
-            MessageBox.Show(kontrolki.Count.ToString());
+            presenter.StartInferenceModule(inferenceModulePanel, inferenceRevisionRtb);
         }
     }
 }
