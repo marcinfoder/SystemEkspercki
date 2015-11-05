@@ -49,7 +49,18 @@ namespace SystemEkspercki
         /// <returns></returns>
         public List<Element> InferenceProces(List<Answer> answers, out string log)
         {
-            answers.RemoveAll(a => a.Value == null);
+            logger.RemovingEmptyAnswers();
+            int count = answers.Count;
+            int removed = answers.RemoveAll(a => a.Value == null);
+            logger.RemovedAnswers(count, removed);
+
+            if (!answers.Any())
+            {
+                logger.ThereAreNotAnyAnswers();
+                log = logger.GetString();
+                return new List<Element>();
+            }
+
             answers.ForEach(a => a.Question = FindQuestionForGivenAnswer(a));
             List<Element> results = new List<Element>();
 
@@ -70,6 +81,7 @@ namespace SystemEkspercki
                     {
                         logger.ElementNotMatchAnswer();
                         isResult = false;
+                        logger.EndOfProcessingAnswer(answer);
                         break;
                     }
 
@@ -90,6 +102,8 @@ namespace SystemEkspercki
             }
 
             logger.EndOfInferenceProces();
+            logger.Result(results.Count, Elements.Count);
+            
             log = logger.GetString();
             return results;
         }

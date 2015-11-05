@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
 using SystemEkspercki.Mapped;
 
@@ -8,6 +6,23 @@ namespace SystemEkspercki
 {
     public class InferenceLogger : IInferenceLogger
     {
+        private string Indent()
+        {
+            return indent;
+        }
+
+        private void IncreaseIndent()
+        {
+            indentDepth++;
+            indent += "    ";
+        }
+
+        private void DecreaseIndent()
+        {
+            indentDepth--;
+            indent = indent.Remove(indent.Length - 4);
+        }
+
         private readonly StringBuilder stringBuilder;
         private int indentDepth;
         private string indent;
@@ -15,11 +30,13 @@ namespace SystemEkspercki
         public InferenceLogger()
         {
             stringBuilder = new StringBuilder();
+            indent = string.Empty;
+            indentDepth = 0;
         }
 
         public void StartOfInferenceProces()
         {
-            stringBuilder.AppendLine(Indent() + "Rozpoczęto proces wnioskowania\n");
+            stringBuilder.AppendLine(Indent() + "Rozpoczęto proces wnioskowania");
             IncreaseIndent();
         }
 
@@ -33,8 +50,8 @@ namespace SystemEkspercki
 
         public void EndOfInferenceProces()
         {
-            stringBuilder.AppendLine(Indent() + "Zakończono proces wnioskowania\n");
             DecreaseIndent();
+            stringBuilder.AppendLine(Indent() + "Zakończono proces wnioskowania");
 
             if (indentDepth != 0)
             {
@@ -44,19 +61,21 @@ namespace SystemEkspercki
 
         public string GetString()
         {
-            return stringBuilder.ToString();
+            string log =  stringBuilder.ToString();
+            stringBuilder.Clear();
+            return log;
         }
 
         public void ProcessingElement(Element element)
         {
-            stringBuilder.AppendLine(Indent() + string.Format("Przetwarzanie elementu: {0}\n", element.Name));
+            stringBuilder.AppendLine(Indent() + string.Format("Przetwarzanie elementu: {0}", element.Name));
             IncreaseIndent();
         }
 
         public void EndOfProcessingElement(Element element)
         {
-            stringBuilder.AppendLine(Indent() + string.Format("Koniec przetwarzania elementu: {0}\n", element.Name));
             DecreaseIndent();
+            stringBuilder.AppendLine(Indent() + string.Format("Koniec przetwarzania elementu: {0}", element.Name));
         }
 
         public void LookingForFact(Question question)
@@ -74,41 +93,44 @@ namespace SystemEkspercki
 
         public void ProcessingAnswer(Answer answer)
         {
-            stringBuilder.AppendLine(Indent() + string.Format("Sprawdzanie czy element pasuje do odpowiedzi, która uruchamia regułę: {0}\n", answer.Question.Rule.Name));
+            stringBuilder.AppendLine(Indent() + string.Format("Sprawdzanie czy element pasuje do odpowiedzi, która uruchamia regułę: {0}", answer.Question.Rule.Name));
             IncreaseIndent();
         }
 
         public void EndOfProcessingAnswer(Answer answer)
         {
-            stringBuilder.AppendLine(Indent() + string.Format("Zakończono sprawdzanie czy element pasuje do odpowiedzi, która uruchamia regułę: {0}\n", answer.Question.Rule.Name));
             DecreaseIndent();
+            stringBuilder.AppendLine(Indent() + string.Format("Zakończono sprawdzanie czy element pasuje do odpowiedzi, która uruchamia regułę: {0}", answer.Question.Rule.Name));
         }
 
         public void ElementMatchAnswer()
         {
-            stringBuilder.AppendLine(Indent() + "Element pasuje do odpowiedzi\n");
+            stringBuilder.AppendLine(Indent() + "Element pasuje do odpowiedzi");
         }
 
         public void ElementNotMatchAnswer()
         {
-            stringBuilder.AppendLine(Indent() + "Element nie pasuje do odpowiedzi\n");
+            stringBuilder.AppendLine(Indent() + "Element nie pasuje do odpowiedzi");
         }
 
-        private string Indent()
+        public void Result(int count, int all)
         {
-            return indent;
+            stringBuilder.Append(Indent() + string.Format("Pasuje {0} z {1} elementów", count, all));
         }
 
-        private void IncreaseIndent()
+        public void RemovingEmptyAnswers()
         {
-            indentDepth++;
-            indent += "    ";
+            stringBuilder.AppendLine("Usuwanie pytań, na które nie udzielono odpowiedzi");
         }
 
-        private void DecreaseIndent()
+        public void RemovedAnswers(int before, int after)
         {
-            indentDepth--;
-            indent.Remove(indent.Length - 4);
+            stringBuilder.AppendLine(string.Format("Usuwanięto {0} z {1} pytań", after, before));
+        }
+
+        public void ThereAreNotAnyAnswers()
+        {
+            stringBuilder.AppendLine("Nie ma żadnych pytań!");
         }
     }
 }

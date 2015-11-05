@@ -17,6 +17,10 @@ namespace SystemEkspercki
         void AddingElement(Element element);
         void NotAddingElement(Element element);
         void EndOfInferenceProces();
+        void Result(int result, int all);
+        void RemovingEmptyAnswers();
+        void RemovedAnswers(int before, int after);
+        void ThereAreNotAnyAnswers();
 
         string GetString();
     }

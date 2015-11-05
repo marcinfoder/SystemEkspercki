@@ -32,8 +32,10 @@
             this.inferenceModuleTabPage = new System.Windows.Forms.TabPage();
             this.inferenceModulePanel = new System.Windows.Forms.TableLayoutPanel();
             this.revisionInferenceTabPage = new System.Windows.Forms.TabPage();
-            this.btnStart = new System.Windows.Forms.Button();
             this.inferenceRevisionRtb = new System.Windows.Forms.RichTextBox();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.endOfInferencingLbl = new System.Windows.Forms.Label();
+            this.knowlegdeEditorTabPage = new System.Windows.Forms.TabPage();
             this.tabControl.SuspendLayout();
             this.inferenceModuleTabPage.SuspendLayout();
             this.revisionInferenceTabPage.SuspendLayout();
@@ -46,6 +48,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.inferenceModuleTabPage);
             this.tabControl.Controls.Add(this.revisionInferenceTabPage);
+            this.tabControl.Controls.Add(this.knowlegdeEditorTabPage);
             this.tabControl.Location = new System.Drawing.Point(13, 13);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -88,17 +91,6 @@
             this.revisionInferenceTabPage.Text = "Rewizja wnioskowania";
             this.revisionInferenceTabPage.UseVisualStyleBackColor = true;
             // 
-            // btnStart
-            // 
-            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStart.Location = new System.Drawing.Point(341, 391);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 23);
-            this.btnStart.TabIndex = 1;
-            this.btnStart.Text = "&Start!";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            // 
             // inferenceRevisionRtb
             // 
             this.inferenceRevisionRtb.AcceptsTab = true;
@@ -113,19 +105,54 @@
             this.inferenceRevisionRtb.Text = "";
             this.inferenceRevisionRtb.WordWrap = false;
             // 
+            // btnStart
+            // 
+            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStart.Location = new System.Drawing.Point(341, 391);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.TabIndex = 1;
+            this.btnStart.Text = "&Start!";
+            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            // 
+            // endOfInferencingLbl
+            // 
+            this.endOfInferencingLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.endOfInferencingLbl.AutoSize = true;
+            this.endOfInferencingLbl.Location = new System.Drawing.Point(198, 396);
+            this.endOfInferencingLbl.Name = "endOfInferencingLbl";
+            this.endOfInferencingLbl.Size = new System.Drawing.Size(137, 13);
+            this.endOfInferencingLbl.TabIndex = 2;
+            this.endOfInferencingLbl.Text = "Zakończono wnioskowanie";
+            this.endOfInferencingLbl.Visible = false;
+            // 
+            // knowlegdeEditorTabPage
+            // 
+            this.knowlegdeEditorTabPage.Location = new System.Drawing.Point(4, 22);
+            this.knowlegdeEditorTabPage.Name = "knowlegdeEditorTabPage";
+            this.knowlegdeEditorTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.knowlegdeEditorTabPage.Size = new System.Drawing.Size(395, 346);
+            this.knowlegdeEditorTabPage.TabIndex = 2;
+            this.knowlegdeEditorTabPage.Text = "Edytor wiedzy";
+            this.knowlegdeEditorTabPage.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(428, 426);
+            this.Controls.Add(this.endOfInferencingLbl);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.tabControl);
             this.Name = "MainWindow";
+            this.ShowIcon = false;
             this.Text = "System ekspercki";
             this.tabControl.ResumeLayout(false);
             this.inferenceModuleTabPage.ResumeLayout(false);
             this.revisionInferenceTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -137,6 +164,8 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.TableLayoutPanel inferenceModulePanel;
         private System.Windows.Forms.RichTextBox inferenceRevisionRtb;
+        private System.Windows.Forms.Label endOfInferencingLbl;
+        private System.Windows.Forms.TabPage knowlegdeEditorTabPage;
     }
 }
 

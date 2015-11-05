@@ -22,6 +22,7 @@ namespace SystemEkspercki
         {
             InitializeComponent();
 
+            this.Text = "System ekspercki - Marcin Foder, listopad 2015";
             this.presenter = presenter;
             presenter.AddCheckBoxs(inferenceModulePanel);
         }
@@ -33,7 +34,9 @@ namespace SystemEkspercki
         /// <param name="e"></param>
         private void btnStart_Click(object sender, EventArgs e)
         {
+            endOfInferencingLbl.Visible = false;
             presenter.StartInferenceModule(inferenceModulePanel, inferenceRevisionRtb);
+            endOfInferencingLbl.Visible = true;
         }
     }
 }

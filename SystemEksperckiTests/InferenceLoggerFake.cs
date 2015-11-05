@@ -61,5 +61,26 @@ namespace SystemEksperckiTests
         {
             return string.Empty;
         }
+
+
+        public void LogResult(int count, int all)
+        {
+        }
+
+        public void Result(int result, int all)
+        {
+        }
+
+        public void RemovingEmptyAnswers()
+        {
+        }
+
+        public void RemovedAnswers(int before, int after)
+        {
+        }
+
+        public void ThereAreNotAnyAnswers()
+        {
+        }
     }
 }
