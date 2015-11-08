@@ -37,7 +37,7 @@ namespace SystemEkspercki
         /// Gets RuleAndQuestionDb
         /// </summary>
         /// <returns></returns>
-        public List<RuleAndQuestionDb> GetRulesAndQuestions()
+        public List<RuleAndQuestionDb> SelectRulesAndQuestions()
         {
             List<RuleAndQuestionDb> rulesAndQuestions = new List<RuleAndQuestionDb>();
 
@@ -75,7 +75,7 @@ namespace SystemEkspercki
         /// Gets ElementAndFactDb
         /// </summary>
         /// <returns></returns>
-        public List<ElementAndFactDb> GetElementsAndFacts()
+        public List<ElementAndFactDb> SelectElementsAndFacts()
         {
             List<ElementAndFactDb> elementsAndFacts = new List<ElementAndFactDb>();
 
@@ -106,7 +106,7 @@ namespace SystemEkspercki
         /// Gets facts
         /// </summary>
         /// <returns></returns>
-        public List<FactDb> GetFacts()
+        public List<FactDb> SelectFacts()
         {
             return factsGuid.Select(f => new FactDb
             {
@@ -130,6 +130,32 @@ namespace SystemEkspercki
             }
 
             return guids;
+        }
+
+        /// <summary>
+        /// Add new fact
+        /// </summary>
+        /// <param name="name"></param>
+        public Guid InsertFact(string name)
+        {
+            return Guid.NewGuid();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="guid"></param>
+        public void DeleteFact(Guid guid)
+        {
+        }
+
+        /// <summary>
+        /// update fact
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <param name="newName"></param>
+        public void UpdateFact(Guid guid, string newName)
+        {
         }
     }
 }

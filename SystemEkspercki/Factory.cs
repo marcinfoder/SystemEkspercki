@@ -11,12 +11,12 @@
         /// <returns>Main window</returns>
         public static MainWindow GetMainWindow()
         {
-            IDataAccessLayer dataAccessLayer = new DataAccessLayerFake();
+            IDataAccessLayer dataAccessLayer = new DataAccessLayer();
             IMapper mapper = new Mapper();
             IDataProvider dataProvider = new DataProvider(dataAccessLayer, mapper);
             IInferenceLogger inferenceLogger = new InferenceLogger();
             IInferenceModule inferenceModule = new InferenceModule(dataProvider, inferenceLogger);
-            IPresenter presenter = new Presenter(inferenceModule);
+            IPresenter presenter = new Presenter(inferenceModule, dataAccessLayer);
 
             MainWindow mainWindow = new MainWindow(presenter);
             return mainWindow;

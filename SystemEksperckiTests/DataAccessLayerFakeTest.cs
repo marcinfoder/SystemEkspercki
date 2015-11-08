@@ -19,7 +19,7 @@ namespace SystemEksperckiTests
             List<ElementAndFactDb> elementsAndFacts = null;
 
             // Act
-            elementsAndFacts = dataAccessLayer.GetElementsAndFacts();
+            elementsAndFacts = dataAccessLayer.SelectElementsAndFacts();
 
             // Assert
             Assert.That(elementsAndFacts.Count, Is.EqualTo(25));
@@ -37,7 +37,7 @@ namespace SystemEksperckiTests
             Guid someArgument = Guid.Empty;
 
             // Act
-            rulesAndQuestions = dataAccessLayer.GetRulesAndQuestions();
+            rulesAndQuestions = dataAccessLayer.SelectRulesAndQuestions();
             someArgument = rulesAndQuestions.First().RuleArgument;
 
             // Assert

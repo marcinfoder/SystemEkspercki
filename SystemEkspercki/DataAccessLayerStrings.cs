@@ -12,7 +12,7 @@
         {
             get
             {
-                return "Server=.;Database=myDataBase;Trusted_Connection=True;";
+                return "Server=.;Database=Expert;Integrated Security=SSPI";
             }
         }
 
@@ -46,6 +46,38 @@
             get
             {
                 return "selectFacts";
+            }
+        }
+        
+        /// <summary>
+        /// Stored procedure name
+        /// </summary>
+        public static string InsertFact
+        {
+            get
+            {
+                return "insertFact";
+            }
+        }
+        /// <summary>
+        /// Stored procedure name
+        /// </summary>
+        public static string DeleteFact
+        {
+            get
+            {
+                return "deleteFact";
+            }
+        }
+
+        /// <summary>
+        /// Stored procedure name
+        /// </summary>
+        public static string UpdateFact
+        {
+            get
+            {
+                return "updateFact";
             }
         }
     }

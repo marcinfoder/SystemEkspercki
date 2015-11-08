@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SystemEkspercki.Db;
 
 namespace SystemEkspercki
@@ -8,8 +9,11 @@ namespace SystemEkspercki
     /// </summary>
     public interface IDataAccessLayer
     {
-        List<RuleAndQuestionDb> GetRulesAndQuestions();
-        List<ElementAndFactDb> GetElementsAndFacts();
-        List<FactDb> GetFacts();
+        List<RuleAndQuestionDb> SelectRulesAndQuestions();
+        List<ElementAndFactDb> SelectElementsAndFacts();
+        List<FactDb> SelectFacts();
+        Guid InsertFact(string name);
+        void DeleteFact(Guid guid);
+        void UpdateFact(Guid guid, string newName);
     }
 }

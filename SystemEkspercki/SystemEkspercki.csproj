@@ -52,6 +52,7 @@
     <Compile Include="Db\ElementAndFactDb.cs" />
     <Compile Include="Db\FactDb.cs" />
     <Compile Include="Db\RuleAndQuestionDb.cs" />
+    <Compile Include="FactComboBoxItem.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="IDataProvider.cs" />
     <Compile Include="IInferenceLogger.cs" />

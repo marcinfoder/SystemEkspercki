@@ -31,7 +31,7 @@ namespace SystemEkspercki
         /// <returns></returns>
         public List<Element> GetElements()
         {
-            var dbEntities = dataAccessLayer.GetElementsAndFacts();
+            var dbEntities = dataAccessLayer.SelectElementsAndFacts();
             return mapper.GetElements(dbEntities);
         }
 
@@ -41,7 +41,7 @@ namespace SystemEkspercki
         /// <returns></returns>
         public List<Question> GetQuestions()
         {
-            var dbEntities = dataAccessLayer.GetRulesAndQuestions();
+            var dbEntities = dataAccessLayer.SelectRulesAndQuestions();
             return mapper.GetQuestions(dbEntities);
         }
 
@@ -51,7 +51,7 @@ namespace SystemEkspercki
         /// <returns></returns>
         public List<Fact> GetFacts()
         {
-            var dbEntities = dataAccessLayer.GetFacts();
+            var dbEntities = dataAccessLayer.SelectFacts();
             return mapper.GetFacts(dbEntities);
         }
     }
