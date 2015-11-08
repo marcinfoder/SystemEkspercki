@@ -26,7 +26,7 @@ namespace SystemEkspercki
             this.Text = "System ekspercki - Marcin Foder, listopad 2015";
             this.presenter = presenter;
             presenter.AddCheckBoxs(inferenceModulePanel);
-            presenter.LoadKnowledgeEditorModule(cbFacts);
+            presenter.LoadKnowledgeEditorModule(cbFacts, cbRules, lbAllFacts, cbRuleCreatingFact);
         }
 
         /// <summary>
@@ -48,7 +48,14 @@ namespace SystemEkspercki
         /// <param name="e"></param>
         private void btnAddFact_Click(object sender, EventArgs e)
         {
-            presenter.AddFact(tbNewFact, cbFacts);
+            if (cbFacts.SelectedIndex == -1)
+            {
+                presenter.AddFact(cbFacts, lbAllFacts, cbRuleCreatingFact);
+            }
+            else
+            {
+                MessageBox.Show("Fakt już istnieje.");
+            }
         }
 
         /// <summary>
@@ -69,6 +76,7 @@ namespace SystemEkspercki
         private void btnEditFact_Click(object sender, EventArgs e)
         {
             presenter.UpdateFact(cbFacts, lastSelectedFactIndex);
+            lbAllFacts.Refresh();
         }
 
         /// <summary>
@@ -84,6 +92,69 @@ namespace SystemEkspercki
             {
                 lastSelectedFactIndex = comboxBox.SelectedIndex;
                 presenter.UpdateRuleLabel(comboxBox, lblFactRule);
+            }
+        }
+
+        private void cbRules_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            presenter.ChangeSelectedRule(cbRules, clbRuleArguments, tbQuestionContent, cbRuleCreatingFact);
+        }
+
+        private void btnAddRule_Click(object sender, EventArgs e)
+        {
+            presenter.AddRule(cbRules, clbRuleArguments, tbQuestionContent, cbRuleCreatingFact);
+        }
+
+        private void btnEditRule_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDeleteRule_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// btnMoveFactWithTrue_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnMoveFactWithTrue_Click(object sender, EventArgs e)
+        {
+            presenter.AddToArgumentList(lbAllFacts, true, clbRuleArguments);
+        }
+
+        /// <summary>
+        /// btnMoveFactWithFalse_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnMoveFactWithFalse_Click(object sender, EventArgs e)
+        {
+            presenter.AddToArgumentList(lbAllFacts, false, clbRuleArguments);
+        }
+
+        /// <summary>
+        /// btnRemoveFactFromRuleArgs_Click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRemoveFactFromRuleArgs_Click(object sender, EventArgs e)
+        {
+            presenter.RemoveFromArgumentList(lbAllFacts, clbRuleArguments);
+        }
+
+        /// <summary>
+        /// cbRuleCreatingFact_SelectedIndexChanged
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cbRuleCreatingFact_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (presenter.CheckIfFactIsCreatedByAnyRule(cbRuleCreatingFact))
+            {
+                MessageBox.Show("Ten fakt jest już tworzony przez inną regułę.");
             }
         }
     }

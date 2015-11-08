@@ -79,6 +79,8 @@
     <Compile Include="Presenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RuleArgumentListBoxItem.cs" />
+    <Compile Include="RuleComboBoxItem.cs" />
     <Compile Include="ThreeStateCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>

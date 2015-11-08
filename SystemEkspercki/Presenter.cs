@@ -62,15 +62,31 @@ namespace SystemEkspercki
         }
 
         /// <summary>
-        /// loads knowlegde editor
+        /// Load knowledge editor
         /// </summary>
         /// <param name="comboBox"></param>
-        public void LoadKnowledgeEditorModule(ComboBox comboBox)
+        /// <param name="cbRules"></param>
+        /// <param name="lbAllFacts"></param>
+        /// <param name="rulesCreatingFact"></param>
+        public void LoadKnowledgeEditorModule(ComboBox comboBox, ComboBox cbRules, ListBox lbAllFacts, ComboBox rulesCreatingFact)
         {
-            inferenceModule.Facts.ForEach(f => comboBox.Items.Add(new FactComboBoxItem
+            foreach (Fact fact in inferenceModule.Facts)
             {
-                Id = f.Id,
-                Name = f.Name
+                FactComboBoxItem factComboBoxItem = new FactComboBoxItem
+                {
+                    Id = fact.Id,
+                    Name = fact.Name
+                };
+
+                comboBox.Items.Add(factComboBoxItem);
+                rulesCreatingFact.Items.Add(factComboBoxItem);
+                lbAllFacts.Items.Add(factComboBoxItem);
+            }
+
+            inferenceModule.Questions.ForEach(q => cbRules.Items.Add(new RuleComboBoxItem
+            {
+                Id = q.Rule.Id,
+                Name = q.Rule.Name,
             }));
         }
 
@@ -92,12 +108,12 @@ namespace SystemEkspercki
         /// <summary>
         /// Add new fact to database
         /// </summary>
-        /// <param name="textBox"></param>
         /// <param name="comboBox"></param>
-        public void AddFact(TextBox textBox, ComboBox comboBox)
+        /// <param name="listBox"></param>
+        /// <param name="ruleCreatingFact"></param>
+        public void AddFact(ComboBox comboBox, ListBox listBox, ComboBox ruleCreatingFact)
         {
-            string name = textBox.Text;
-            textBox.Clear();
+            string name = comboBox.Text;
 
             Guid guid = dataAccessLayer.InsertFact(name);
             FactComboBoxItem factComboBoxItem = new FactComboBoxItem
@@ -107,6 +123,8 @@ namespace SystemEkspercki
             };
 
             comboBox.Items.Add(factComboBoxItem);
+            listBox.Items.Add(factComboBoxItem);
+            ruleCreatingFact.Items.Add(factComboBoxItem);
             comboBox.SelectedItem = factComboBoxItem;
 
             inferenceModule.Facts.Add(new Fact
@@ -170,6 +188,125 @@ namespace SystemEkspercki
             {
                 label.Text = quesion.Rule.Name;
             }
+        }
+
+        /// <summary>
+        /// change selected rule
+        /// </summary>
+        /// <param name="rules"></param>
+        /// <param name="arguments"></param>
+        /// <param name="questionContent"></param>
+        /// <param name="ruleCreatingFact"></param>
+        public void ChangeSelectedRule(ComboBox rules, CheckedListBox arguments, TextBox questionContent, ComboBox ruleCreatingFact)
+        {
+            RuleComboBoxItem ruleComboBoxItem = rules.SelectedItem as RuleComboBoxItem ?? new RuleComboBoxItem();
+            Question question = inferenceModule.Questions.Find(q => q.Rule.Id == ruleComboBoxItem.Id);
+            Rule rule = question.Rule;
+
+            foreach (var item in ruleCreatingFact.Items)
+            {
+                FactComboBoxItem factComboBoxItem = item as FactComboBoxItem;
+                if (factComboBoxItem.Id == rule.Target.Id)
+                {
+                    ruleCreatingFact.SelectedItem = item;
+                    break;
+                }
+            }
+
+            questionContent.Text = question.Content;
+            arguments.Items.Clear();
+
+            foreach (RuleArgument ruleArgument in rule.Arguments)
+            {
+                Fact fact = inferenceModule.Facts.Find(f => f.Id == ruleArgument.Id);
+                arguments.Items.Add(new RuleArgumentListBoxItem
+                {
+                    Id = fact.Id,
+                    Name = fact.Name,
+                    Value = ruleArgument.RequiredValue
+                });
+            }
+        }
+
+        /// <summary>
+        /// AddToArgumentList
+        /// </summary>
+        /// <param name="listBox"></param>
+        /// <param name="value"></param>
+        /// <param name="checkedListBox"></param>
+        public void AddToArgumentList(ListBox listBox, bool value, CheckedListBox checkedListBox)
+        {
+            FactComboBoxItem factComboBoxItem = listBox.SelectedItem as FactComboBoxItem;
+
+            if (factComboBoxItem == null)
+            {
+                return;
+            }
+
+            listBox.Items.Remove(factComboBoxItem);
+            checkedListBox.Items.Add(new RuleArgumentListBoxItem
+            {
+                Id = factComboBoxItem.Id,
+                Name = factComboBoxItem.Name,
+                Value = value
+            }, value);
+        }
+
+        /// <summary>
+        /// RemoveFromArgumentList
+        /// </summary>
+        /// <param name="listBox"></param>
+        /// <param name="checkedListBox"></param>
+        public void RemoveFromArgumentList(ListBox listBox, CheckedListBox checkedListBox)
+        {
+            RuleArgumentListBoxItem ruleArgumentListBoxItem = checkedListBox.SelectedItem as RuleArgumentListBoxItem;
+
+            if (ruleArgumentListBoxItem == null)
+            {
+                return;
+            }
+
+            checkedListBox.Items.Remove(ruleArgumentListBoxItem);
+            FactComboBoxItem factComboBoxItem = new FactComboBoxItem
+            {
+                Id = ruleArgumentListBoxItem.Id,
+                Name = ruleArgumentListBoxItem.Name
+            };
+
+            listBox.Items.Add(factComboBoxItem);
+        }
+
+        /// <summary>
+        /// CheckIfFactIsCreatedByAnyRule
+        /// </summary>
+        /// <param name="comboBox"></param>
+        public bool CheckIfFactIsCreatedByAnyRule(ComboBox comboBox)
+        {
+            FactComboBoxItem factComboBoxItem = comboBox.SelectedItem as FactComboBoxItem;
+            return inferenceModule.Questions.Any(q => q.Rule.Target.Id == factComboBoxItem.Id);
+        }
+
+        /// <summary>
+        /// AddRule
+        /// </summary>
+        /// <param name="rules"></param>
+        /// <param name="arguments"></param>
+        /// <param name="question"></param>
+        /// <param name="creatingFact"></param>
+        public void AddRule(ComboBox rules, CheckedListBox arguments, TextBox question, ComboBox creatingFact)
+        {
+            string questionContent = question.Text;
+            string ruleName = rules.Text;
+            Guid target = (creatingFact.SelectedItem as FactComboBoxItem).Id;
+            Dictionary<Guid, bool> ruleArguments = new Dictionary<Guid, bool>();
+
+            foreach (var argument in arguments.Items)
+            {
+                RuleArgumentListBoxItem argumentListBoxItem = argument as RuleArgumentListBoxItem;
+                ruleArguments.Add(argumentListBoxItem.Id, argumentListBoxItem.Value);
+            }
+
+            dataAccessLayer.InsertRule(questionContent, ruleName, target, ruleArguments);
         }
     }
 }

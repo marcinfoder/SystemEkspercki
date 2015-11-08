@@ -157,5 +157,18 @@ namespace SystemEkspercki
         public void UpdateFact(Guid guid, string newName)
         {
         }
+
+        /// <summary>
+        /// InsertRule
+        /// </summary>
+        /// <param name="questionContent"></param>
+        /// <param name="ruleName"></param>
+        /// <param name="creatingFactGuid"></param>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
+        public Guid[] InsertRule(string questionContent, string ruleName, Guid creatingFactGuid, Dictionary<Guid, bool> arguments)
+        {
+            throw new Exception();
+        }
     }
 }

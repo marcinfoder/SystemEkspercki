@@ -80,5 +80,16 @@
                 return "updateFact";
             }
         }
+
+        /// <summary>
+        /// Stored procedure name
+        /// </summary>
+        public static string InsertRule
+        {
+            get
+            {
+                return "insertRule";
+            }
+        }
     }
 }

@@ -15,5 +15,7 @@ namespace SystemEkspercki
         Guid InsertFact(string name);
         void DeleteFact(Guid guid);
         void UpdateFact(Guid guid, string newName);
+
+        Guid[] InsertRule(string questionContent, string ruleName, Guid creatingFactGuid, Dictionary<Guid, bool> arguments);
     }
 }

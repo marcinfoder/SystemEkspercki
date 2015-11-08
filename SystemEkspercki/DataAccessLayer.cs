@@ -34,7 +34,6 @@ namespace SystemEkspercki
                             RuleId = (Guid) reader["RuleId"],
                             RuleName = (string) reader["RuleName"],
                             QuestionId = (Guid) reader["QuestionId"],
-                            QuestionName = (string) reader["QuestionName"],
                             QuestionContent = (string) reader["QuestionContent"],
                             CreatingFactId = (Guid) reader["RuleCreatingFactId"],
                             CreatingFactName = (string) reader["RuleCreatingFactName"],
@@ -184,6 +183,56 @@ namespace SystemEkspercki
                 command.ExecuteNonQuery();
                 connection.Close();
             }
+        }
+
+        /// <summary>
+        /// InsertRule
+        /// </summary>
+        /// <param name="questionContent"></param>
+        /// <param name="ruleName"></param>
+        /// <param name="creatingFactGuid"></param>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
+        public Guid[] InsertRule(string questionContent, string ruleName, Guid creatingFactGuid, Dictionary<Guid, bool> arguments)
+        {
+            using (SqlConnection connection = new SqlConnection(DataAccessLayerStrings.ExpertDbConnectionString))
+            {
+                SqlCommand command = new SqlCommand(DataAccessLayerStrings.InsertRule, connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter questionContentPar = command.Parameters.Add("@QuestionContent", SqlDbType.NVarChar);
+                questionContentPar.Value = questionContent;
+                questionContentPar.Size = 128;
+
+                SqlParameter ruleNamePar = command.Parameters.Add("@RuleName", SqlDbType.NVarChar);
+                ruleNamePar.Value = ruleName;
+                ruleNamePar.Size = 32;
+
+                command.Parameters.Add("@CreatingFactGuid", SqlDbType.UniqueIdentifier).Value = creatingFactGuid;
+
+                SqlParameter ruleId = command.Parameters.Add("@RuleId", SqlDbType.UniqueIdentifier);
+                ruleId.Direction = ParameterDirection.Output;
+
+                SqlParameter questionId = command.Parameters.Add("@QuestionId", SqlDbType.UniqueIdentifier);
+                questionId.Direction = ParameterDirection.Output;
+
+                DataTable ruleArgs = new DataTable("RuleArgs");
+                ruleArgs.Columns.Add("FactId", typeof(Guid));
+                ruleArgs.Columns.Add("Value", typeof(bool));
+
+                foreach (var arg in arguments)
+                {
+                    ruleArgs.Rows.Add(arg.Key, arg.Value);
+                }
+
+                command.Parameters.Add("@RuleArgs", SqlDbType.Structured).Value = ruleArgs;
+
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+
+            return null;
         }
     }
 }
