@@ -157,5 +157,35 @@ namespace SystemEkspercki
                 MessageBox.Show("Ten fakt jest już tworzony przez inną regułę.");
             }
         }
+
+        private void btnElementAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnElementEdit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnElementDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddFactABoutElementTrue_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddFactAboutElementFalse_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRemoveFactAboutElement_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -306,7 +306,24 @@ namespace SystemEkspercki
                 ruleArguments.Add(argumentListBoxItem.Id, argumentListBoxItem.Value);
             }
 
-            dataAccessLayer.InsertRule(questionContent, ruleName, target, ruleArguments);
+            Guid[] returnGuids = dataAccessLayer.InsertRule(questionContent, ruleName, target, ruleArguments);
+
+            inferenceModule.Questions.Add(new Question
+            {
+                Content = questionContent,
+                Id = returnGuids[1],
+                Rule = new Rule
+                {
+                    Id = returnGuids[0],
+                    Arguments = ruleArguments.Select(ra => new RuleArgument
+                    {
+                        Id = ra.Key,
+                        RequiredValue = ra.Value
+                    }).ToList(),
+                    Name = ruleName,
+                    Target = inferenceModule.Facts.Find(f => f.Id == target)
+                }
+            });
         }
     }
 }

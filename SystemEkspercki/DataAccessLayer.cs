@@ -195,6 +195,8 @@ namespace SystemEkspercki
         /// <returns></returns>
         public Guid[] InsertRule(string questionContent, string ruleName, Guid creatingFactGuid, Dictionary<Guid, bool> arguments)
         {
+            Guid ruleId, questionId;
+
             using (SqlConnection connection = new SqlConnection(DataAccessLayerStrings.ExpertDbConnectionString))
             {
                 SqlCommand command = new SqlCommand(DataAccessLayerStrings.InsertRule, connection);
@@ -210,11 +212,11 @@ namespace SystemEkspercki
 
                 command.Parameters.Add("@CreatingFactGuid", SqlDbType.UniqueIdentifier).Value = creatingFactGuid;
 
-                SqlParameter ruleId = command.Parameters.Add("@RuleId", SqlDbType.UniqueIdentifier);
-                ruleId.Direction = ParameterDirection.Output;
+                SqlParameter ruleIdPar = command.Parameters.Add("@RuleId", SqlDbType.UniqueIdentifier);
+                ruleIdPar.Direction = ParameterDirection.Output;
 
-                SqlParameter questionId = command.Parameters.Add("@QuestionId", SqlDbType.UniqueIdentifier);
-                questionId.Direction = ParameterDirection.Output;
+                SqlParameter questionIdPar = command.Parameters.Add("@QuestionId", SqlDbType.UniqueIdentifier);
+                questionIdPar.Direction = ParameterDirection.Output;
 
                 DataTable ruleArgs = new DataTable("RuleArgs");
                 ruleArgs.Columns.Add("FactId", typeof(Guid));
@@ -230,9 +232,16 @@ namespace SystemEkspercki
                 connection.Open();
                 command.ExecuteNonQuery();
                 connection.Close();
+
+                ruleId = (Guid)ruleIdPar.Value;
+                questionId = (Guid)questionIdPar.Value;
             }
 
-            return null;
+            return new Guid[]
+            {
+                ruleId,
+                questionId
+            };
         }
     }
 }
