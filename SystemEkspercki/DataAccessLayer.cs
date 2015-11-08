@@ -69,8 +69,8 @@ namespace SystemEkspercki
                         {
                             ElementId = (Guid) reader["ElementId"],
                             ElementName = (string) reader["ElementName"],
-                            FactId = (Guid) reader["ElementId"],
-                            FactName = (string) reader["ElementName"],
+                            FactId = (Guid) reader["FactId"],
+                            FactName = (string) reader["FactName"],
                             Value = (bool) reader["Value"]
                         });
                     }
@@ -242,6 +242,49 @@ namespace SystemEkspercki
                 ruleId,
                 questionId
             };
+        }
+
+        /// <summary>
+        /// Insert element
+        /// </summary>
+        /// <param name="elementName"></param>
+        /// <param name="factsAboutElement"></param>
+        /// <returns></returns>
+        public Guid InsertElement(string elementName, Dictionary<Guid, bool> factsAboutElement)
+        {
+            Guid elementGuid;
+
+            using (SqlConnection connection = new SqlConnection(DataAccessLayerStrings.ExpertDbConnectionString))
+            {
+                SqlCommand command = new SqlCommand(DataAccessLayerStrings.InsertElement, connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter elementNamePar = command.Parameters.Add("@ElementName", SqlDbType.NVarChar);
+                elementNamePar.Value = elementName;
+                elementNamePar.Size = 128;
+
+                SqlParameter elementIdPar = command.Parameters.Add("@ElementId", SqlDbType.UniqueIdentifier);
+                elementIdPar.Direction = ParameterDirection.Output;
+
+                DataTable factsAboutElementPar = new DataTable("@FactsAboutElement");
+                factsAboutElementPar.Columns.Add("FactId", typeof(Guid));
+                factsAboutElementPar.Columns.Add("Value", typeof(bool));
+
+                foreach (var arg in factsAboutElement)
+                {
+                    factsAboutElementPar.Rows.Add(arg.Key, arg.Value);
+                }
+
+                command.Parameters.Add("@FactsAboutElement", SqlDbType.Structured).Value = factsAboutElementPar;
+
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+
+                elementGuid = (Guid)elementIdPar.Value;
+            }
+
+            return elementGuid;
         }
     }
 }

@@ -35,7 +35,22 @@
             this.inferenceRevisionRtb = new System.Windows.Forms.RichTextBox();
             this.knowlegdeEditorTabPage = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnRemoveFactAboutElement = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnAddFactAboutElementFalse = new System.Windows.Forms.Button();
+            this.clbFactsAboutElements = new System.Windows.Forms.CheckedListBox();
+            this.btnAddFactABoutElementTrue = new System.Windows.Forms.Button();
+            this.lbFactsElements = new System.Windows.Forms.ListBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnElementDelete = new System.Windows.Forms.Button();
+            this.cbElements = new System.Windows.Forms.ComboBox();
+            this.btnElementEdit = new System.Windows.Forms.Button();
+            this.btnElementAdd = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.clbRuleArguments = new System.Windows.Forms.CheckedListBox();
+            this.btnDeleteRule = new System.Windows.Forms.Button();
             this.btnEditRule = new System.Windows.Forms.Button();
             this.btnAddRule = new System.Windows.Forms.Button();
             this.cbRules = new System.Windows.Forms.ComboBox();
@@ -60,29 +75,14 @@
             this.btnAddFact = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.endOfInferencingLbl = new System.Windows.Forms.Label();
-            this.btnDeleteRule = new System.Windows.Forms.Button();
-            this.clbRuleArguments = new System.Windows.Forms.CheckedListBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.btnElementDelete = new System.Windows.Forms.Button();
-            this.btnElementEdit = new System.Windows.Forms.Button();
-            this.btnElementAdd = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.btnRemoveFactAboutElement = new System.Windows.Forms.Button();
-            this.btnAddFactAboutElementFalse = new System.Windows.Forms.Button();
-            this.btnAddFactABoutElementTrue = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.inferenceModuleTabPage.SuspendLayout();
             this.revisionInferenceTabPage.SuspendLayout();
             this.knowlegdeEditorTabPage.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbFacts.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -106,7 +106,7 @@
             this.inferenceModuleTabPage.Location = new System.Drawing.Point(4, 22);
             this.inferenceModuleTabPage.Name = "inferenceModuleTabPage";
             this.inferenceModuleTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.inferenceModuleTabPage.Size = new System.Drawing.Size(364, 346);
+            this.inferenceModuleTabPage.Size = new System.Drawing.Size(364, 551);
             this.inferenceModuleTabPage.TabIndex = 0;
             this.inferenceModuleTabPage.Text = "Moduł wnioskujący";
             this.inferenceModuleTabPage.UseVisualStyleBackColor = true;
@@ -121,7 +121,7 @@
             this.inferenceModulePanel.Name = "inferenceModulePanel";
             this.inferenceModulePanel.RowCount = 1;
             this.inferenceModulePanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.inferenceModulePanel.Size = new System.Drawing.Size(358, 340);
+            this.inferenceModulePanel.Size = new System.Drawing.Size(358, 545);
             this.inferenceModulePanel.TabIndex = 0;
             // 
             // revisionInferenceTabPage
@@ -130,7 +130,7 @@
             this.revisionInferenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.revisionInferenceTabPage.Name = "revisionInferenceTabPage";
             this.revisionInferenceTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.revisionInferenceTabPage.Size = new System.Drawing.Size(364, 346);
+            this.revisionInferenceTabPage.Size = new System.Drawing.Size(364, 551);
             this.revisionInferenceTabPage.TabIndex = 1;
             this.revisionInferenceTabPage.Text = "Rewizja wnioskowania";
             this.revisionInferenceTabPage.UseVisualStyleBackColor = true;
@@ -144,7 +144,7 @@
             this.inferenceRevisionRtb.Margin = new System.Windows.Forms.Padding(0);
             this.inferenceRevisionRtb.Name = "inferenceRevisionRtb";
             this.inferenceRevisionRtb.ReadOnly = true;
-            this.inferenceRevisionRtb.Size = new System.Drawing.Size(358, 340);
+            this.inferenceRevisionRtb.Size = new System.Drawing.Size(358, 545);
             this.inferenceRevisionRtb.TabIndex = 0;
             this.inferenceRevisionRtb.Text = "";
             this.inferenceRevisionRtb.WordWrap = false;
@@ -172,6 +172,139 @@
             this.panel1.Size = new System.Drawing.Size(358, 545);
             this.panel1.TabIndex = 2;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnRemoveFactAboutElement);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.btnAddFactAboutElementFalse);
+            this.groupBox2.Controls.Add(this.clbFactsAboutElements);
+            this.groupBox2.Controls.Add(this.btnAddFactABoutElementTrue);
+            this.groupBox2.Controls.Add(this.lbFactsElements);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Controls.Add(this.btnElementDelete);
+            this.groupBox2.Controls.Add(this.cbElements);
+            this.groupBox2.Controls.Add(this.btnElementEdit);
+            this.groupBox2.Controls.Add(this.btnElementAdd);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(0, 337);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(358, 208);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Elementy";
+            // 
+            // btnRemoveFactAboutElement
+            // 
+            this.btnRemoveFactAboutElement.Location = new System.Drawing.Point(172, 178);
+            this.btnRemoveFactAboutElement.Name = "btnRemoveFactAboutElement";
+            this.btnRemoveFactAboutElement.Size = new System.Drawing.Size(21, 23);
+            this.btnRemoveFactAboutElement.TabIndex = 19;
+            this.btnRemoveFactAboutElement.Text = "<";
+            this.btnRemoveFactAboutElement.UseVisualStyleBackColor = true;
+            this.btnRemoveFactAboutElement.Click += new System.EventHandler(this.btnRemoveFactAboutElement_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(196, 90);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(96, 13);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Fakty o elemencie:";
+            // 
+            // btnAddFactAboutElementFalse
+            // 
+            this.btnAddFactAboutElementFalse.Location = new System.Drawing.Point(172, 135);
+            this.btnAddFactAboutElementFalse.Name = "btnAddFactAboutElementFalse";
+            this.btnAddFactAboutElementFalse.Size = new System.Drawing.Size(21, 23);
+            this.btnAddFactAboutElementFalse.TabIndex = 18;
+            this.btnAddFactAboutElementFalse.Text = "F";
+            this.btnAddFactAboutElementFalse.UseVisualStyleBackColor = true;
+            this.btnAddFactAboutElementFalse.Click += new System.EventHandler(this.btnAddFactAboutElementFalse_Click);
+            // 
+            // clbFactsAboutElements
+            // 
+            this.clbFactsAboutElements.FormattingEnabled = true;
+            this.clbFactsAboutElements.Location = new System.Drawing.Point(199, 106);
+            this.clbFactsAboutElements.Name = "clbFactsAboutElements";
+            this.clbFactsAboutElements.Size = new System.Drawing.Size(153, 94);
+            this.clbFactsAboutElements.TabIndex = 17;
+            // 
+            // btnAddFactABoutElementTrue
+            // 
+            this.btnAddFactABoutElementTrue.Location = new System.Drawing.Point(172, 106);
+            this.btnAddFactABoutElementTrue.Name = "btnAddFactABoutElementTrue";
+            this.btnAddFactABoutElementTrue.Size = new System.Drawing.Size(21, 23);
+            this.btnAddFactABoutElementTrue.TabIndex = 17;
+            this.btnAddFactABoutElementTrue.Text = "P";
+            this.btnAddFactABoutElementTrue.UseVisualStyleBackColor = true;
+            this.btnAddFactABoutElementTrue.Click += new System.EventHandler(this.btnAddFactABoutElementTrue_Click);
+            // 
+            // lbFactsElements
+            // 
+            this.lbFactsElements.FormattingEnabled = true;
+            this.lbFactsElements.Location = new System.Drawing.Point(10, 106);
+            this.lbFactsElements.Name = "lbFactsElements";
+            this.lbFactsElements.Size = new System.Drawing.Size(156, 95);
+            this.lbFactsElements.TabIndex = 17;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(10, 90);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(36, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Fakty:";
+            // 
+            // btnElementDelete
+            // 
+            this.btnElementDelete.Location = new System.Drawing.Point(127, 64);
+            this.btnElementDelete.Name = "btnElementDelete";
+            this.btnElementDelete.Size = new System.Drawing.Size(51, 23);
+            this.btnElementDelete.TabIndex = 19;
+            this.btnElementDelete.Text = "&Usuń";
+            this.btnElementDelete.UseVisualStyleBackColor = true;
+            this.btnElementDelete.Click += new System.EventHandler(this.btnElementDelete_Click);
+            // 
+            // cbElements
+            // 
+            this.cbElements.FormattingEnabled = true;
+            this.cbElements.Location = new System.Drawing.Point(10, 37);
+            this.cbElements.Name = "cbElements";
+            this.cbElements.Size = new System.Drawing.Size(168, 21);
+            this.cbElements.TabIndex = 1;
+            // 
+            // btnElementEdit
+            // 
+            this.btnElementEdit.Location = new System.Drawing.Point(68, 64);
+            this.btnElementEdit.Name = "btnElementEdit";
+            this.btnElementEdit.Size = new System.Drawing.Size(52, 23);
+            this.btnElementEdit.TabIndex = 18;
+            this.btnElementEdit.Text = "&Edytuj";
+            this.btnElementEdit.UseVisualStyleBackColor = true;
+            this.btnElementEdit.Click += new System.EventHandler(this.btnElementEdit_Click);
+            // 
+            // btnElementAdd
+            // 
+            this.btnElementAdd.Location = new System.Drawing.Point(10, 64);
+            this.btnElementAdd.Name = "btnElementAdd";
+            this.btnElementAdd.Size = new System.Drawing.Size(52, 23);
+            this.btnElementAdd.TabIndex = 17;
+            this.btnElementAdd.Text = "&Dodaj";
+            this.btnElementAdd.UseVisualStyleBackColor = true;
+            this.btnElementAdd.Click += new System.EventHandler(this.btnElementAdd_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Element:";
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.clbRuleArguments);
@@ -197,6 +330,24 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Reguły";
+            // 
+            // clbRuleArguments
+            // 
+            this.clbRuleArguments.FormattingEnabled = true;
+            this.clbRuleArguments.Location = new System.Drawing.Point(199, 121);
+            this.clbRuleArguments.Name = "clbRuleArguments";
+            this.clbRuleArguments.Size = new System.Drawing.Size(153, 94);
+            this.clbRuleArguments.TabIndex = 16;
+            // 
+            // btnDeleteRule
+            // 
+            this.btnDeleteRule.Location = new System.Drawing.Point(127, 61);
+            this.btnDeleteRule.Name = "btnDeleteRule";
+            this.btnDeleteRule.Size = new System.Drawing.Size(51, 23);
+            this.btnDeleteRule.TabIndex = 15;
+            this.btnDeleteRule.Text = "&Usuń";
+            this.btnDeleteRule.UseVisualStyleBackColor = true;
+            this.btnDeleteRule.Click += new System.EventHandler(this.btnDeleteRule_Click);
             // 
             // btnEditRule
             // 
@@ -336,6 +487,7 @@
             this.gbFacts.Controls.Add(this.cbFacts);
             this.gbFacts.Controls.Add(this.btnAddFact);
             this.gbFacts.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbFacts.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.gbFacts.Location = new System.Drawing.Point(0, 0);
             this.gbFacts.Name = "gbFacts";
             this.gbFacts.Size = new System.Drawing.Size(358, 115);
@@ -437,157 +589,6 @@
             this.endOfInferencingLbl.Text = "Zakończono wnioskowanie";
             this.endOfInferencingLbl.Visible = false;
             // 
-            // btnDeleteRule
-            // 
-            this.btnDeleteRule.Location = new System.Drawing.Point(127, 61);
-            this.btnDeleteRule.Name = "btnDeleteRule";
-            this.btnDeleteRule.Size = new System.Drawing.Size(51, 23);
-            this.btnDeleteRule.TabIndex = 15;
-            this.btnDeleteRule.Text = "&Usuń";
-            this.btnDeleteRule.UseVisualStyleBackColor = true;
-            this.btnDeleteRule.Click += new System.EventHandler(this.btnDeleteRule_Click);
-            // 
-            // clbRuleArguments
-            // 
-            this.clbRuleArguments.FormattingEnabled = true;
-            this.clbRuleArguments.Location = new System.Drawing.Point(199, 121);
-            this.clbRuleArguments.Name = "clbRuleArguments";
-            this.clbRuleArguments.Size = new System.Drawing.Size(153, 94);
-            this.clbRuleArguments.TabIndex = 16;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnRemoveFactAboutElement);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.btnAddFactAboutElementFalse);
-            this.groupBox2.Controls.Add(this.checkedListBox1);
-            this.groupBox2.Controls.Add(this.btnAddFactABoutElementTrue);
-            this.groupBox2.Controls.Add(this.listBox1);
-            this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Controls.Add(this.btnElementDelete);
-            this.groupBox2.Controls.Add(this.comboBox1);
-            this.groupBox2.Controls.Add(this.btnElementEdit);
-            this.groupBox2.Controls.Add(this.btnElementAdd);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 337);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(358, 208);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Elementy";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Element:";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(10, 37);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(168, 21);
-            this.comboBox1.TabIndex = 1;
-            // 
-            // btnElementDelete
-            // 
-            this.btnElementDelete.Location = new System.Drawing.Point(127, 64);
-            this.btnElementDelete.Name = "btnElementDelete";
-            this.btnElementDelete.Size = new System.Drawing.Size(51, 23);
-            this.btnElementDelete.TabIndex = 19;
-            this.btnElementDelete.Text = "&Usuń";
-            this.btnElementDelete.UseVisualStyleBackColor = true;
-            this.btnElementDelete.Click += new System.EventHandler(this.btnElementDelete_Click);
-            // 
-            // btnElementEdit
-            // 
-            this.btnElementEdit.Location = new System.Drawing.Point(68, 64);
-            this.btnElementEdit.Name = "btnElementEdit";
-            this.btnElementEdit.Size = new System.Drawing.Size(52, 23);
-            this.btnElementEdit.TabIndex = 18;
-            this.btnElementEdit.Text = "&Edytuj";
-            this.btnElementEdit.UseVisualStyleBackColor = true;
-            this.btnElementEdit.Click += new System.EventHandler(this.btnElementEdit_Click);
-            // 
-            // btnElementAdd
-            // 
-            this.btnElementAdd.Location = new System.Drawing.Point(10, 64);
-            this.btnElementAdd.Name = "btnElementAdd";
-            this.btnElementAdd.Size = new System.Drawing.Size(52, 23);
-            this.btnElementAdd.TabIndex = 17;
-            this.btnElementAdd.Text = "&Dodaj";
-            this.btnElementAdd.UseVisualStyleBackColor = true;
-            this.btnElementAdd.Click += new System.EventHandler(this.btnElementAdd_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(10, 90);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(36, 13);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "Fakty:";
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(10, 106);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(156, 95);
-            this.listBox1.TabIndex = 17;
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(199, 106);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(153, 94);
-            this.checkedListBox1.TabIndex = 17;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(196, 90);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(96, 13);
-            this.label10.TabIndex = 17;
-            this.label10.Text = "Fakty o elemencie:";
-            // 
-            // btnRemoveFactAboutElement
-            // 
-            this.btnRemoveFactAboutElement.Location = new System.Drawing.Point(172, 178);
-            this.btnRemoveFactAboutElement.Name = "btnRemoveFactAboutElement";
-            this.btnRemoveFactAboutElement.Size = new System.Drawing.Size(21, 23);
-            this.btnRemoveFactAboutElement.TabIndex = 19;
-            this.btnRemoveFactAboutElement.Text = "<";
-            this.btnRemoveFactAboutElement.UseVisualStyleBackColor = true;
-            this.btnRemoveFactAboutElement.Click += new System.EventHandler(this.btnRemoveFactAboutElement_Click);
-            // 
-            // btnAddFactAboutElementFalse
-            // 
-            this.btnAddFactAboutElementFalse.Location = new System.Drawing.Point(172, 135);
-            this.btnAddFactAboutElementFalse.Name = "btnAddFactAboutElementFalse";
-            this.btnAddFactAboutElementFalse.Size = new System.Drawing.Size(21, 23);
-            this.btnAddFactAboutElementFalse.TabIndex = 18;
-            this.btnAddFactAboutElementFalse.Text = "F";
-            this.btnAddFactAboutElementFalse.UseVisualStyleBackColor = true;
-            this.btnAddFactAboutElementFalse.Click += new System.EventHandler(this.btnAddFactAboutElementFalse_Click);
-            // 
-            // btnAddFactABoutElementTrue
-            // 
-            this.btnAddFactABoutElementTrue.Location = new System.Drawing.Point(172, 106);
-            this.btnAddFactABoutElementTrue.Name = "btnAddFactABoutElementTrue";
-            this.btnAddFactABoutElementTrue.Size = new System.Drawing.Size(21, 23);
-            this.btnAddFactABoutElementTrue.TabIndex = 17;
-            this.btnAddFactABoutElementTrue.Text = "P";
-            this.btnAddFactABoutElementTrue.UseVisualStyleBackColor = true;
-            this.btnAddFactABoutElementTrue.Click += new System.EventHandler(this.btnAddFactABoutElementTrue_Click);
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -604,12 +605,12 @@
             this.revisionInferenceTabPage.ResumeLayout(false);
             this.knowlegdeEditorTabPage.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.gbFacts.ResumeLayout(false);
             this.gbFacts.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -653,16 +654,16 @@
         private System.Windows.Forms.CheckedListBox clbRuleArguments;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnElementDelete;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbElements;
         private System.Windows.Forms.Button btnElementEdit;
         private System.Windows.Forms.Button btnElementAdd;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRemoveFactAboutElement;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnAddFactAboutElementFalse;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox clbFactsAboutElements;
         private System.Windows.Forms.Button btnAddFactABoutElementTrue;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lbFactsElements;
         private System.Windows.Forms.Label label9;
     }
 }

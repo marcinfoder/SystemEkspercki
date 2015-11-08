@@ -12,7 +12,7 @@ namespace SystemEkspercki
         void RemoveFact(ComboBox comboBox, int index);
         void UpdateFact(ComboBox comboBox, int index);
 
-        void LoadKnowledgeEditorModule(ComboBox comboBox, ComboBox cbRules, ListBox lbAllFacts, ComboBox rulesCreatingFact);
+        void LoadKnowledgeEditorModule(ComboBox comboBox, ComboBox cbRules, ListBox lbAllFacts, ComboBox rulesCreatingFact, ListBox lbFactElement);
         void ChangeSelectedRule(ComboBox rules, CheckedListBox arguments, TextBox questionContent, ComboBox ruleCreatingFact);
 
         void AddToArgumentList(ListBox listBox, bool value, CheckedListBox checkedListBox);
@@ -20,5 +20,7 @@ namespace SystemEkspercki
         bool CheckIfFactIsCreatedByAnyRule(ComboBox comboBox);
 
         void AddRule(ComboBox rules, CheckedListBox arguments, TextBox question, ComboBox creatingFact);
+
+        void AddElement(ComboBox cbElements, CheckedListBox clbFactsAboutElements);
     }
 }

@@ -91,5 +91,16 @@
                 return "insertRule";
             }
         }
+
+        /// <summary>
+        /// Stored procedure name
+        /// </summary>
+        public static string InsertElement
+        {
+            get
+            {
+                return "insertElement";
+            }
+        }
     }
 }

@@ -168,7 +168,22 @@ namespace SystemEkspercki
         /// <returns></returns>
         public Guid[] InsertRule(string questionContent, string ruleName, Guid creatingFactGuid, Dictionary<Guid, bool> arguments)
         {
-            throw new Exception();
+            return new Guid[]
+            {
+                Guid.NewGuid(),
+                Guid.NewGuid()
+            };
+        }
+
+        /// <summary>
+        /// InsertElement
+        /// </summary>
+        /// <param name="elementName"></param>
+        /// <param name="factsAboutElement"></param>
+        /// <returns></returns>
+        public Guid InsertElement(string elementName, Dictionary<Guid, bool> factsAboutElement)
+        {
+            return Guid.NewGuid();
         }
     }
 }

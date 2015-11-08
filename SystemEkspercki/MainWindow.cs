@@ -26,7 +26,7 @@ namespace SystemEkspercki
             this.Text = "System ekspercki - Marcin Foder, listopad 2015";
             this.presenter = presenter;
             presenter.AddCheckBoxs(inferenceModulePanel);
-            presenter.LoadKnowledgeEditorModule(cbFacts, cbRules, lbAllFacts, cbRuleCreatingFact);
+            presenter.LoadKnowledgeEditorModule(cbFacts, cbRules, lbAllFacts, cbRuleCreatingFact, lbFactsElements);
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace SystemEkspercki
 
         private void btnElementAdd_Click(object sender, EventArgs e)
         {
-
+            presenter.AddElement(cbElements, clbFactsAboutElements);
         }
 
         private void btnElementEdit_Click(object sender, EventArgs e)
@@ -175,17 +175,17 @@ namespace SystemEkspercki
 
         private void btnAddFactABoutElementTrue_Click(object sender, EventArgs e)
         {
-
+            presenter.AddToArgumentList(lbFactsElements, true, clbFactsAboutElements);
         }
 
         private void btnAddFactAboutElementFalse_Click(object sender, EventArgs e)
         {
-
+            presenter.AddToArgumentList(lbFactsElements, false, clbFactsAboutElements);
         }
 
         private void btnRemoveFactAboutElement_Click(object sender, EventArgs e)
         {
-
+            presenter.RemoveFromArgumentList(lbFactsElements, clbFactsAboutElements);
         }
     }
 }

@@ -68,7 +68,8 @@ namespace SystemEkspercki
         /// <param name="cbRules"></param>
         /// <param name="lbAllFacts"></param>
         /// <param name="rulesCreatingFact"></param>
-        public void LoadKnowledgeEditorModule(ComboBox comboBox, ComboBox cbRules, ListBox lbAllFacts, ComboBox rulesCreatingFact)
+        /// <param name="lbFactElement"></param>
+        public void LoadKnowledgeEditorModule(ComboBox comboBox, ComboBox cbRules, ListBox lbAllFacts, ComboBox rulesCreatingFact, ListBox lbFactElement)
         {
             foreach (Fact fact in inferenceModule.Facts)
             {
@@ -81,6 +82,7 @@ namespace SystemEkspercki
                 comboBox.Items.Add(factComboBoxItem);
                 rulesCreatingFact.Items.Add(factComboBoxItem);
                 lbAllFacts.Items.Add(factComboBoxItem);
+                lbFactElement.Items.Add(factComboBoxItem);
             }
 
             inferenceModule.Questions.ForEach(q => cbRules.Items.Add(new RuleComboBoxItem
@@ -324,6 +326,25 @@ namespace SystemEkspercki
                     Target = inferenceModule.Facts.Find(f => f.Id == target)
                 }
             });
+        }
+
+        /// <summary>
+        /// add new element
+        /// </summary>
+        /// <param name="cbElements"></param>
+        /// <param name="clbFactsAboutElements"></param>
+        public void AddElement(ComboBox cbElements, CheckedListBox clbFactsAboutElements)
+        {
+            string elementName = cbElements.Text;
+            Dictionary<Guid, bool> factsAboutElement = new Dictionary<Guid, bool>();
+
+            foreach (var item in clbFactsAboutElements.Items)
+            {
+                RuleArgumentListBoxItem factAboutElement = item as RuleArgumentListBoxItem;
+                factsAboutElement.Add(factAboutElement.Id, factAboutElement.Value);
+            }
+
+            Guid elementId = dataAccessLayer.InsertElement(elementName, factsAboutElement);
         }
     }
 }
