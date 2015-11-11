@@ -185,5 +185,13 @@ namespace SystemEkspercki
         {
             return Guid.NewGuid();
         }
+
+        public void DeleteRule(Guid guid)
+        {
+        }
+
+        public void DeleteElement(Guid guid)
+        {
+        }
     }
 }

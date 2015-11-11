@@ -1,0 +1,20 @@
+USE [Expert]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[deleteAll]
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	DELETE RuleArguments;
+	DELETE Question;
+	DELETE [Rule];
+	DELETE FactAboutElement;
+	DELETE Element;
+	DELETE Fact;
+END;

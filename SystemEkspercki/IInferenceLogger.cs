@@ -23,5 +23,19 @@ namespace SystemEkspercki
         void ThereAreNotAnyAnswers();
 
         string GetString();
+
+        void SearchingForAnswer(Element element, Question question);
+
+        void CheckingForArgument(Fact fact);
+
+        void ArgumentDoesNotMatch(RuleArgument ruleArgument);
+
+        void ArgumentMatch(RuleArgument ruleArgument);
+
+        void AddingFact(FactAboutElement factAboutElementNew);
+
+        void CheckingIfElementCanBeCreated();
+
+        void EnfOfCheckingIfFactCanBeAdded();
     }
 }

@@ -286,5 +286,43 @@ namespace SystemEkspercki
 
             return elementGuid;
         }
+
+        /// <summary>
+        /// delete rule
+        /// </summary>
+        /// <param name="guid"></param>
+        public void DeleteRule(Guid guid)
+        {
+            using (SqlConnection connection = new SqlConnection(DataAccessLayerStrings.ExpertDbConnectionString))
+            {
+                SqlCommand command = new SqlCommand(DataAccessLayerStrings.DeleteRule, connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add("@Guid", SqlDbType.UniqueIdentifier).Value = guid;
+
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
+        /// <summary>
+        /// delete element
+        /// </summary>
+        /// <param name="guid"></param>
+        public void DeleteElement(Guid guid)
+        {
+            using (SqlConnection connection = new SqlConnection(DataAccessLayerStrings.ExpertDbConnectionString))
+            {
+                SqlCommand command = new SqlCommand(DataAccessLayerStrings.DeleteElement, connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add("@Guid", SqlDbType.UniqueIdentifier).Value = guid;
+
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
     }
 }

@@ -133,6 +133,8 @@ namespace SystemEkspercki
                 return value == factAboutElement.Value;
             }
 
+            logger.ElementDoesnotHaveAnswer(element, question);
+            logger.CheckingIfElementCanBeCreated();
             return SearchForAnswer(element, question, value);
         }
 
@@ -189,6 +191,9 @@ namespace SystemEkspercki
         {
             foreach (RuleArgument ruleArgument in question.Rule.Arguments)
             {
+                Fact fact = Facts.Find(f => ruleArgument.Id == f.Id);
+                logger.CheckingForArgument(fact);
+
                 FactAboutElement factAboutElement = FindFactAboutElementWhichIsRuleArgument(element, ruleArgument);
 
                 if (factAboutElement == null)
@@ -200,6 +205,7 @@ namespace SystemEkspercki
                         return false;
                     }
 
+                    logger.SearchingForAnswer(element, answeringQuestion);
                     if (SearchForAnswer(element, answeringQuestion, ruleArgument.RequiredValue))
                     {
                         factAboutElement = FindFactAboutElementWhichIsRuleArgument(element, ruleArgument);
@@ -208,16 +214,22 @@ namespace SystemEkspercki
 
                 if (factAboutElement.Value != ruleArgument.RequiredValue)
                 {
+                    logger.ArgumentDoesNotMatch(ruleArgument);
                     return false;
                 }
+                logger.ArgumentMatch(ruleArgument);
             }
 
-            element.Facts.Add(new FactAboutElement
+            FactAboutElement factAboutElementNew = new FactAboutElement
             {
                 Id = question.Rule.Target.Id,
                 Name = question.Rule.Target.Name,
                 Value = value
-            });
+            };
+
+            logger.AddingFact(factAboutElementNew);
+            element.Facts.Add(factAboutElementNew);
+            logger.EnfOfCheckingIfFactCanBeAdded();
             return true;
         }
     }

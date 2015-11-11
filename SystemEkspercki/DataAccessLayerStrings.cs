@@ -102,5 +102,27 @@
                 return "insertElement";
             }
         }
+
+        /// <summary>
+        /// Stored procedure name
+        /// </summary>
+        public static string DeleteRule
+        {
+            get
+            {
+                return "deleteRule";
+            }
+        }
+
+        /// <summary>
+        /// Stored procedure name
+        /// </summary>
+        public static string DeleteElement
+        {
+            get
+            {
+                return "deleteElement";
+            }
+        }
     }
 }

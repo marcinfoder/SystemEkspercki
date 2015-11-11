@@ -82,5 +82,43 @@ namespace SystemEksperckiTests
         public void ThereAreNotAnyAnswers()
         {
         }
+
+
+        public void SearchingForAnswer(Element element, Question question)
+        {
+        }
+
+        public void CheckingForArgument(RuleArgument ruleArgument)
+        {
+        }
+
+        public void ArgumentDoesNotMatch(RuleArgument ruleArgument)
+        {
+        }
+
+        public void ArgumentMatch(RuleArgument ruleArgument)
+        {
+        }
+
+        public void AddingFact(FactAboutElement factAboutElementNew)
+        {
+        }
+
+
+        public void CheckingForArgument(Fact fact)
+        {
+        }
+
+
+        public void CheckingIfElementCanBeCreated()
+        {
+            throw new System.NotImplementedException();
+        }
+
+
+        public void EnfOfCheckingIfFactCanBeAdded()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

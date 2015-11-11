@@ -63,6 +63,7 @@ namespace SystemEkspercki
         {
             string log =  stringBuilder.ToString();
             stringBuilder.Clear();
+            indentDepth = 0;
             return log;
         }
 
@@ -80,16 +81,21 @@ namespace SystemEkspercki
 
         public void LookingForFact(Question question)
         {
+            stringBuilder.AppendLine(Indent() + string.Format("Szukanie faktu: {0}", question.Rule.Target.Name));
+            IncreaseIndent();
         }
 
         public void ElementHasAnswer(Element element, Question question)
         {
+            stringBuilder.AppendLine(Indent() + string.Format("Element posiada fakt: {0}", question.Rule.Target.Name));
+            DecreaseIndent();
         }
 
         public void ElementDoesnotHaveAnswer(Element element, Question question)
         {
+            stringBuilder.AppendLine(Indent() + string.Format("Element nie posiada faktu: {0}", question.Rule.Target.Name));
+            DecreaseIndent();
         }
-
 
         public void ProcessingAnswer(Answer answer)
         {
@@ -131,6 +137,49 @@ namespace SystemEkspercki
         public void ThereAreNotAnyAnswers()
         {
             stringBuilder.AppendLine("Nie ma żadnych pytań!");
+        }
+
+
+        public void SearchingForAnswer(Element element, Question question)
+        {
+            IncreaseIndent();
+            stringBuilder.AppendLine(Indent() + string.Format("Szukanie, czy element {0} posiada odpowiedź na pytanie {1}", element.Name, question.Rule.Name));
+        }
+
+        public void CheckingForArgument(Fact fact)
+        {
+            stringBuilder.AppendLine(Indent() + string.Format("Sprawdzanie argumentu dla faktu {0}", fact.Name));
+            IncreaseIndent();
+        }
+
+        public void ArgumentDoesNotMatch(RuleArgument ruleArgument)
+        {
+            stringBuilder.AppendLine(Indent() + "Argument posiada inną wartość");
+            DecreaseIndent();
+        }
+
+        public void ArgumentMatch(RuleArgument ruleArgument)
+        {
+            stringBuilder.AppendLine(Indent() + "Argument posiada taką samą wartość");
+            DecreaseIndent();
+        }
+
+        public void AddingFact(FactAboutElement factAboutElementNew)
+        {
+            stringBuilder.AppendLine(Indent() + string.Format("Dodawanie faktu {0} do elementu", factAboutElementNew.Name));
+        }
+
+        public void CheckingIfElementCanBeCreated()
+        {
+            stringBuilder.AppendLine(Indent() + "Sprawdzanie, czy można stworzyć ten fakt dla tego elementu");
+            IncreaseIndent();
+        }
+
+
+        public void EnfOfCheckingIfFactCanBeAdded()
+        {
+            stringBuilder.AppendLine(Indent() + "Zakończono sprawdzanie, czy można stworzyć ten fakt dla tego elementu");
+            DecreaseIndent();
         }
     }
 }

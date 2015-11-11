@@ -69,7 +69,8 @@ namespace SystemEkspercki
         /// <param name="lbAllFacts"></param>
         /// <param name="rulesCreatingFact"></param>
         /// <param name="lbFactElement"></param>
-        public void LoadKnowledgeEditorModule(ComboBox comboBox, ComboBox cbRules, ListBox lbAllFacts, ComboBox rulesCreatingFact, ListBox lbFactElement)
+        /// <param name="cbElements"></param>
+        public void LoadKnowledgeEditorModule(ComboBox comboBox, ComboBox cbRules, ListBox lbAllFacts, ComboBox rulesCreatingFact, ListBox lbFactElement, ComboBox cbElements)
         {
             foreach (Fact fact in inferenceModule.Facts)
             {
@@ -89,6 +90,12 @@ namespace SystemEkspercki
             {
                 Id = q.Rule.Id,
                 Name = q.Rule.Name,
+            }));
+
+            inferenceModule.Elements.ForEach(e => cbElements.Items.Add(new FactComboBoxItem
+            {
+                Id = e.Id,
+                Name = e.Name
             }));
         }
 
@@ -113,7 +120,8 @@ namespace SystemEkspercki
         /// <param name="comboBox"></param>
         /// <param name="listBox"></param>
         /// <param name="ruleCreatingFact"></param>
-        public void AddFact(ComboBox comboBox, ListBox listBox, ComboBox ruleCreatingFact)
+        /// <param name="elementsListBox"></param>
+        public void AddFact(ComboBox comboBox, ListBox listBox, ComboBox ruleCreatingFact, ListBox elementsListBox)
         {
             string name = comboBox.Text;
 
@@ -127,6 +135,7 @@ namespace SystemEkspercki
             comboBox.Items.Add(factComboBoxItem);
             listBox.Items.Add(factComboBoxItem);
             ruleCreatingFact.Items.Add(factComboBoxItem);
+            elementsListBox.Items.Add(factComboBoxItem);
             comboBox.SelectedItem = factComboBoxItem;
 
             inferenceModule.Facts.Add(new Fact
@@ -199,10 +208,11 @@ namespace SystemEkspercki
         /// <param name="arguments"></param>
         /// <param name="questionContent"></param>
         /// <param name="ruleCreatingFact"></param>
-        public void ChangeSelectedRule(ComboBox rules, CheckedListBox arguments, TextBox questionContent, ComboBox ruleCreatingFact)
+        /// <param name="lbFacts"></param>
+        public void ChangeSelectedRule(ComboBox rules, CheckedListBox arguments, TextBox questionContent, ComboBox ruleCreatingFact, ListBox lbFacts)
         {
-            RuleComboBoxItem ruleComboBoxItem = rules.SelectedItem as RuleComboBoxItem ?? new RuleComboBoxItem();
-            Question question = inferenceModule.Questions.Find(q => q.Rule.Id == ruleComboBoxItem.Id);
+            string ruleName = rules.Text;
+            Question question = inferenceModule.Questions.Find(q => q.Rule.Name == ruleName);
             Rule rule = question.Rule;
 
             foreach (var item in ruleCreatingFact.Items)
@@ -226,7 +236,20 @@ namespace SystemEkspercki
                     Id = fact.Id,
                     Name = fact.Name,
                     Value = ruleArgument.RequiredValue
-                });
+                }, ruleArgument.RequiredValue);
+            }
+
+            lbFacts.Items.Clear();
+            foreach (Fact fact in inferenceModule.Facts)
+            {
+                if (rule.Arguments.All(a => a.Id != fact.Id))
+                {
+                    lbFacts.Items.Add(new FactComboBoxItem
+                    {
+                        Id = fact.Id,
+                        Name = fact.Name
+                    });
+                }
             }
         }
 
@@ -336,6 +359,7 @@ namespace SystemEkspercki
         public void AddElement(ComboBox cbElements, CheckedListBox clbFactsAboutElements)
         {
             string elementName = cbElements.Text;
+            cbElements.Items.Add(elementName);
             Dictionary<Guid, bool> factsAboutElement = new Dictionary<Guid, bool>();
 
             foreach (var item in clbFactsAboutElements.Items)
@@ -345,6 +369,109 @@ namespace SystemEkspercki
             }
 
             Guid elementId = dataAccessLayer.InsertElement(elementName, factsAboutElement);
+            Element element = new Element
+            {
+                Id = elementId,
+                Name = elementName,
+                Facts = factsAboutElement.Select(fae => new FactAboutElement
+                {
+                    Id = fae.Key,
+                    Value = fae.Value,
+                    Name = inferenceModule.Facts.Find(f => f.Id == fae.Key).Name
+                }).ToList()
+            };
+
+            inferenceModule.Elements.Add(element);
+        }
+
+
+        public void MoveArguments(ComboBox comboBox, ListBox listbox, CheckedListBox checkedListBox)
+        {
+            string elementName = comboBox.Text;
+            Element element = inferenceModule.Elements.Find(e => e.Name == elementName);
+
+            checkedListBox.Items.Clear();
+            element.Facts.ForEach(fae => checkedListBox.Items.Add(new RuleArgumentListBoxItem
+            {
+                Id = fae.Id,
+                Name = fae.Name,
+                Value = fae.Value
+            }, fae.Value));
+
+            listbox.Items.Clear();
+            foreach (Fact fact in inferenceModule.Facts)
+            {
+                if (element.Facts.All(f => f.Id != fact.Id))
+                {
+                    listbox.Items.Add(new FactComboBoxItem
+                    {
+                        Id = fact.Id,
+                        Name = fact.Name
+                    });
+                }
+            }
+        }
+
+        /// <summary>
+        /// Delete rule
+        /// </summary>
+        /// <param name="rules"></param>
+        /// <param name="arguments"></param>
+        /// <param name="listBox"></param>
+        /// <param name="questionTb"></param>
+        /// <param name="creatingFact"></param>
+        public void DeleteRule(ComboBox rules, CheckedListBox arguments, ListBox listBox, TextBox questionTb)
+        {
+            string ruleName = rules.Text;
+            Question question = inferenceModule.Questions.Find(q => q.Rule.Name == ruleName);
+            questionTb.Text = string.Empty;
+
+            arguments.Items.Clear();
+            listBox.Items.Clear();
+            rules.Items.Clear();
+
+            inferenceModule.Facts.ForEach(f => listBox.Items.Add(new RuleComboBoxItem
+            {
+                Id = f.Id,
+                Name = f.Name
+            }));
+
+            inferenceModule.Questions.RemoveAll(q => q.Id == question.Id);
+
+            inferenceModule.Questions.ForEach(q => rules.Items.Add(q.Rule.Name));
+
+            dataAccessLayer.DeleteRule(question.Rule.Id);
+        }
+
+        /// <summary>
+        /// delete element
+        /// </summary>
+        /// <param name="cbElements"></param>
+        /// <param name="lbFactsElements"></param>
+        /// <param name="clbFactsAboutElements"></param>
+        public void DeleteElement(ComboBox cbElements, ListBox lbFactsElements, CheckedListBox clbFactsAboutElements)
+        {
+            string elementName = cbElements.Text;
+            Element element = inferenceModule.Elements.Find(e => e.Name == elementName);
+
+            dataAccessLayer.DeleteElement(element.Id);
+            inferenceModule.Elements.RemoveAll(e => e.Id == element.Id);
+
+            cbElements.Items.Clear();
+
+            clbFactsAboutElements.Items.Clear();
+            lbFactsElements.Items.Clear();
+
+            inferenceModule.Facts.ForEach(e =>
+            {
+                lbFactsElements.Items.Add(new FactComboBoxItem
+                {
+                    Id = e.Id,
+                    Name = e.Name
+                });
+            });
+
+            inferenceModule.Elements.ForEach(e => cbElements.Items.Add(e.Name));
         }
     }
 }

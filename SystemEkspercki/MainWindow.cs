@@ -26,7 +26,7 @@ namespace SystemEkspercki
             this.Text = "System ekspercki - Marcin Foder, listopad 2015";
             this.presenter = presenter;
             presenter.AddCheckBoxs(inferenceModulePanel);
-            presenter.LoadKnowledgeEditorModule(cbFacts, cbRules, lbAllFacts, cbRuleCreatingFact, lbFactsElements);
+            presenter.LoadKnowledgeEditorModule(cbFacts, cbRules, lbAllFacts, cbRuleCreatingFact, lbFactsElements, cbElements);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace SystemEkspercki
         {
             if (cbFacts.SelectedIndex == -1)
             {
-                presenter.AddFact(cbFacts, lbAllFacts, cbRuleCreatingFact);
+                presenter.AddFact(cbFacts, lbAllFacts, cbRuleCreatingFact, lbFactsElements);
             }
             else
             {
@@ -97,7 +97,8 @@ namespace SystemEkspercki
 
         private void cbRules_SelectedIndexChanged(object sender, EventArgs e)
         {
-            presenter.ChangeSelectedRule(cbRules, clbRuleArguments, tbQuestionContent, cbRuleCreatingFact);
+            afterTrueChange = false;
+            presenter.ChangeSelectedRule(cbRules, clbRuleArguments, tbQuestionContent, cbRuleCreatingFact, lbAllFacts);
         }
 
         private void btnAddRule_Click(object sender, EventArgs e)
@@ -112,7 +113,7 @@ namespace SystemEkspercki
 
         private void btnDeleteRule_Click(object sender, EventArgs e)
         {
-
+            presenter.DeleteRule(cbRules, clbRuleArguments, lbAllFacts, tbQuestionContent);
         }
 
         /// <summary>
@@ -152,11 +153,14 @@ namespace SystemEkspercki
         /// <param name="e"></param>
         private void cbRuleCreatingFact_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (presenter.CheckIfFactIsCreatedByAnyRule(cbRuleCreatingFact))
+            if (afterTrueChange && presenter.CheckIfFactIsCreatedByAnyRule(cbRuleCreatingFact))
             {
                 MessageBox.Show("Ten fakt jest już tworzony przez inną regułę.");
             }
+            afterTrueChange = true;
         }
+
+        private bool afterTrueChange = true;
 
         private void btnElementAdd_Click(object sender, EventArgs e)
         {
@@ -170,7 +174,7 @@ namespace SystemEkspercki
 
         private void btnElementDelete_Click(object sender, EventArgs e)
         {
-
+            presenter.DeleteElement(cbElements, lbFactsElements, clbFactsAboutElements);
         }
 
         private void btnAddFactABoutElementTrue_Click(object sender, EventArgs e)
@@ -186,6 +190,11 @@ namespace SystemEkspercki
         private void btnRemoveFactAboutElement_Click(object sender, EventArgs e)
         {
             presenter.RemoveFromArgumentList(lbFactsElements, clbFactsAboutElements);
+        }
+
+        private void cbElements_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            presenter.MoveArguments(cbElements, lbFactsElements, clbFactsAboutElements);
         }
     }
 }
